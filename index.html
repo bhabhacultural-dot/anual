@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Investiture Ceremony | Music Player</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0d;
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    header {
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* PLAYER */
+
+    .player {
+      background: #151518;
+      border: 1px solid #29292d;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .now-playing-label {
+      color: #888;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .song-title {
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      word-break: break-word;
+    }
+
+    /* PROGRESS */
+
+    .progress-container {
+      cursor: pointer;
+      padding: 10px 0;
+    }
+
+    .progress {
+      width: 100%;
+      height: 6px;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    .time {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* CONTROLS */
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .control-btn {
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: #29292d;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.2s;
+    }
+
+    .control-btn:hover {
+      background: #3b3b40;
+      transform: scale(1.05);
+    }
+
+    .play-btn {
+      width: 62px;
+      height: 62px;
+      font-size: 24px;
+      background: #fff;
+      color: #000;
+    }
+
+    .play-btn:hover {
+      background: #ddd;
+    }
+
+    /* EXTRA CONTROLS */
+
+    .extra-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .extra-btn,
+    select {
+      background: #222226;
+      color: #fff;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 9px 12px;
+      cursor: pointer;
+    }
+
+    .volume {
+      width: 100px;
+    }
+
+    /* PLAYLIST */
+
+    .playlist {
+      background: #151518;
+      border: 1px solid #29292d;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .playlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .playlist-header h2 {
+      font-size: 18px;
+    }
+
+    .song-count {
+      color: #888;
+      font-size: 13px;
+    }
+
+    .song {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .song:hover {
+      background: #222226;
+    }
+
+    .song.active {
+      background: #29292d;
+    }
+
+    .number {
+      width: 30px;
+      color: #888;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .song.active .number {
+      color: #fff;
+    }
+
+    .song-name {
+      flex: 1;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .song-status {
+      color: #888;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      header h1 {
+        font-size: 22px;
+      }
+
+      .player {
+        padding: 18px;
+        border-radius: 15px;
+      }
+
+      .playlist {
+        padding: 15px;
+        border-radius: 15px;
+      }
+
+      .song-title {
+        font-size: 19px;
+      }
+
+      .controls {
+        gap: 10px;
+      }
+
+      .control-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .play-btn {
+        width: 56px;
+        height: 56px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>INVESTITURE CEREMONY</h1>
+      <p>Music Practice Player</p>
+    </header>
+
+
+    <!-- PLAYER -->
+
+    <div class="player">
+
+      <div class="now-playing-label">
+        Now Playing
+      </div>
+
+      <div class="song-title" id="songTitle">
+        Select a song
+      </div>
+
+
+      <!-- PROGRESS -->
+
+      <div class="progress-container" id="progressContainer">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="time">
+          <span id="currentTime">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+
+
+      <!-- MAIN CONTROLS -->
+
+      <div class="controls">
+
+        <button class="control-btn" id="previousBtn" title="Previous">
+          ⏮
+        </button>
+
+        <button class="control-btn" id="backwardBtn" title="10 seconds backward">
+          ↶
+        </button>
+
+        <button class="control-btn play-btn" id="playBtn" title="Play">
+          ▶
+        </button>
+
+        <button class="control-btn" id="forwardBtn" title="10 seconds forward">
+          ↷
+        </button>
+
+        <button class="control-btn" id="nextBtn" title="Next">
+          ⏭
+        </button>
+
+      </div>
+
+
+      <!-- EXTRA CONTROLS -->
+
+      <div class="extra-controls">
+
+        <button class="extra-btn" id="loopBtn">
+          🔁 Loop: Off
+        </button>
+
+        <select id="speedSelect">
+          <option value="0.5">0.5x</option>
+          <option value="0.75">0.75x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.25">1.25x</option>
+          <option value="1.5">1.5x</option>
+          <option value="2">2x</option>
+        </select>
+
+        <span>🔊</span>
+
+        <input
+          type="range"
+          class="volume"
+          id="volume"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+        >
+
+      </div>
+
+    </div>
+
+
+    <!-- PLAYLIST -->
+
+    <div class="playlist">
+
+      <div class="playlist-header">
+        <h2>Playlist</h2>
+        <span class="song-count" id="songCount"></span>
+      </div>
+
+      <div id="playlist"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- AUDIO -->
+
+  <audio id="audio"></audio>
+
+
+  <script>
+
+    /*
+    =====================================================
+    SONG LIST
+    =====================================================
+
+    IMPORTANT:
+
+    Put your audio files inside:
+
+    audio/
+
+    Then write the exact filename here.
+
+    Numbering controls the playlist order.
+    =====================================================
+    */
+
+    const songs = [
+
+      "01 - Welcome Song.mp3",
+      "02 - Prayer.mp3",
+      "03 - Saraswati Vandana.mp3",
+      "04 - March Past.mp3",
+      "05 - Oath Ceremony.mp3",
+      "06 - National Anthem.mp3"
+
+    ];
+
+
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    const audio = document.getElementById("audio");
+
+    const songTitle = document.getElementById("songTitle");
+
+    const playBtn = document.getElementById("playBtn");
+
+    const previousBtn = document.getElementById("previousBtn");
+
+    const nextBtn = document.getElementById("nextBtn");
+
+    const backwardBtn = document.getElementById("backwardBtn");
+
+    const forwardBtn = document.getElementById("forwardBtn");
+
+    const progressBar = document.getElementById("progressBar");
+
+    const progressContainer =
+      document.getElementById("progressContainer");
+
+    const currentTime =
+      document.getElementById("currentTime");
+
+    const duration =
+      document.getElementById("duration");
+
+    const playlist =
+      document.getElementById("playlist");
+
+    const songCount =
+      document.getElementById("songCount");
+
+    const volume =
+      document.getElementById("volume");
+
+    const speedSelect =
+      document.getElementById("speedSelect");
+
+    const loopBtn =
+      document.getElementById("loopBtn");
+
+
+    let currentSong = 0;
+
+    let loopEnabled = false;
+
+
+    // ==========================================
+    // LOAD PLAYLIST
+    // ==========================================
+
+    function createPlaylist() {
+
+      playlist.innerHTML = "";
+
+      songCount.textContent =
+        songs.length + " songs";
+
+      songs.forEach((song, index) => {
+
+        const item = document.createElement("div");
+
+        item.className = "song";
+
+        item.innerHTML = `
+
+          <div class="number">
+            ${String(index + 1).padStart(2, "0")}
+          </div>
+
+          <div class="song-name">
+            ${song}
+          </div>
+
+          <div class="song-status">
+            ▶
+          </div>
+
+        `;
+
+        item.addEventListener("click", () => {
+
+          loadSong(index);
+          playSong();
+
+        });
+
+        playlist.appendChild(item);
+
+      });
+
+    }
+
+
+    // ==========================================
+    // LOAD SONG
+    // ==========================================
+
+    function loadSong(index) {
+
+      if (index < 0) {
+        index = songs.length - 1;
+      }
+
+      if (index >= songs.length) {
+        index = 0;
+      }
+
+      currentSong = index;
+
+      const file = songs[currentSong];
+
+      audio.src =
+        "audio/" + encodeURIComponent(file);
+
+      songTitle.textContent = file;
+
+      updatePlaylist();
+
+    }
+
+
+    // ==========================================
+    // UPDATE PLAYLIST
+    // ==========================================
+
+    function updatePlaylist() {
+
+      const items =
+        document.querySelectorAll(".song");
+
+      items.forEach((item, index) => {
+
+        item.classList.toggle(
+          "active",
+          index === currentSong
+        );
+
+        const status =
+          item.querySelector(".song-status");
+
+        status.textContent =
+          index === currentSong && !audio.paused
+            ? "▶"
+            : "•";
+
+      });
+
+    }
+
+
+    // ==========================================
+    // PLAY
+    // ==========================================
+
+    function playSong() {
+
+      audio.play();
+
+      playBtn.textContent = "⏸";
+
+      updatePlaylist();
+
+    }
+
+
+    // ==========================================
+    // PAUSE
+    // ==========================================
+
+    function pauseSong() {
+
+      audio.pause();
+
+      playBtn.textContent = "▶";
+
+      updatePlaylist();
+
+    }
+
+
+    // ==========================================
+    // PLAY / PAUSE
+    // ==========================================
+
+    playBtn.addEventListener("click", () => {
+
+      if (audio.paused) {
+
+        playSong();
+
+      } else {
+
+        pauseSong();
+
+      }
+
+    });
+
+
+    // ==========================================
+    // NEXT
+    // ==========================================
+
+    nextBtn.addEventListener("click", () => {
+
+      loadSong(currentSong + 1);
+
+      playSong();
+
+    });
+
+
+    // ==========================================
+    // PREVIOUS
+    // ==========================================
+
+    previousBtn.addEventListener("click", () => {
+
+      loadSong(currentSong - 1);
+
+      playSong();
+
+    });
+
+
+    // ==========================================
+    // 10 SEC BACKWARD
+    // ==========================================
+
+    backwardBtn.addEventListener("click", () => {
+
+      audio.currentTime =
+        Math.max(0, audio.currentTime - 10);
+
+    });
+
+
+    // ==========================================
+    // 10 SEC FORWARD
+    // ==========================================
+
+    forwardBtn.addEventListener("click", () => {
+
+      audio.currentTime =
+        Math.min(
+          audio.duration || 0,
+          audio.currentTime + 10
+        );
+
+    });
+
+
+    // ==========================================
+    // PROGRESS BAR
+    // ==========================================
+
+    audio.addEventListener("timeupdate", () => {
+
+      if (!audio.duration) return;
+
+      const percent =
+        (audio.currentTime / audio.duration) * 100;
+
+      progressBar.style.width =
+        percent + "%";
+
+      currentTime.textContent =
+        formatTime(audio.currentTime);
+
+    });
+
+
+    // ==========================================
+    // DURATION
+    // ==========================================
+
+    audio.addEventListener("loadedmetadata", () => {
+
+      duration.textContent =
+        formatTime(audio.duration);
+
+    });
+
+
+    // ==========================================
+    // SEEK
+    // ==========================================
+
+    progressContainer.addEventListener("click", (event) => {
+
+      if (!audio.duration) return;
+
+      const rect =
+        progressContainer.getBoundingClientRect();
+
+      const position =
+        event.clientX - rect.left;
+
+      const percentage =
+        position / rect.width;
+
+      audio.currentTime =
+        percentage * audio.duration;
+
+    });
+
+
+    // ==========================================
+    // AUTO NEXT
+    // ==========================================
+
+    audio.addEventListener("ended", () => {
+
+      if (loopEnabled) {
+
+        audio.currentTime = 0;
+
+        playSong();
+
+      } else {
+
+        loadSong(currentSong + 1);
+
+        playSong();
+
+      }
+
+    });
+
+
+    // ==========================================
+    // LOOP
+    // ==========================================
+
+    loopBtn.addEventListener("click", () => {
+
+      loopEnabled = !loopEnabled;
+
+      loopBtn.textContent =
+        loopEnabled
+          ? "🔁 Loop: On"
+          : "🔁 Loop: Off";
+
+    });
+
+
+    // ==========================================
+    // VOLUME
+    // ==========================================
+
+    volume.addEventListener("input", () => {
+
+      audio.volume =
+        volume.value;
+
+    });
+
+
+    // ==========================================
+    // SPEED
+    // ==========================================
+
+    speedSelect.addEventListener("change", () => {
+
+      audio.playbackRate =
+        Number(speedSelect.value);
+
+    });
+
+
+    // ==========================================
+    // FORMAT TIME
+    // ==========================================
+
+    function formatTime(seconds) {
+
+      if (!seconds || isNaN(seconds)) {
+        return "0:00";
+      }
+
+      const minutes =
+        Math.floor(seconds / 60);
+
+      const secs =
+        Math.floor(seconds % 60)
+          .toString()
+          .padStart(2, "0");
+
+      return `${minutes}:${secs}`;
+
+    }
+
+
+    // ==========================================
+    // KEYBOARD SHORTCUTS
+    // ==========================================
+
+    document.addEventListener("keydown", (event) => {
+
+      if (event.code === "Space") {
+
+        event.preventDefault();
+
+        if (audio.paused) {
+          playSong();
+        } else {
+          pauseSong();
+        }
+
+      }
+
+      if (event.code === "ArrowRight") {
+
+        audio.currentTime += 10;
+
+      }
+
+      if (event.code === "ArrowLeft") {
+
+        audio.currentTime -= 10;
+
+      }
+
+      if (event.code === "ArrowUp") {
+
+        event.preventDefault();
+
+        audio.volume =
+          Math.min(1, audio.volume + 0.1);
+
+        volume.value =
+          audio.volume;
+
+      }
+
+      if (event.code === "ArrowDown") {
+
+        event.preventDefault();
+
+        audio.volume =
+          Math.max(0, audio.volume - 0.1);
+
+        volume.value =
+          audio.volume;
+
+      }
+
+    });
+
+
+    // ==========================================
+    // INITIALIZE
+    // ==========================================
+
+    createPlaylist();
+
+    loadSong(0);
+
+  </script>
+
+</body>
+</html>
