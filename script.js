@@ -3,30 +3,37 @@
 ===================================================== */
 
 const songs = [
-    "vaman-avatar.mp3",
-    "akroor-yashoda.mp3",
-    "balram-krishna.mp3",
-    "brahmand-darshan.mp3",
-    "chalo-sakhi.mp3",
-    "cheer-haran.mp3",
-    "dahi-handi.mp3",
+    "dashavatar.mp3",
+    "krishna-janm.mp3",
     "dance-class-1-3.mp3",
-    "gandhari-shraap.mp3",
-    "geeta-updesh.mp3",
+    "brahmand-darshan.mp3",
+    "dahi-handi.mp3",
     "holi.mp3",
-    "kans-krishna.mp3",
-    "karmabai.mp3",
-    "krishna-draupadi.mp3",
-    "kubja.mp3",
     "maharas.mp3",
-    "meerabai.mp3",
-    "radha.mp3",
+    "akroor-yashoda.mp3",
     "radha-krishna.mp3",
-    "shakuni-duryodhan.mp3",
-    "shanti-doot.mp3",
+    "kubja.mp3",
+    "kans-krishna.mp3",
+    "balram-krishna.mp3",
+    "sudama.mp3",
     "shishupal.mp3",
-    "surdas.mp3"
+    "krishna-draupadi.mp3",
+    "shakuni-duryodhan.mp3",
+    "cheer-haran.mp3",
+    "shanti-doot.mp3",
+    "geeta-updesh.mp3",
+    "gandhari-shraap.mp3",
+    "dwarika-vileen.mp3",
+    "vaman-avatar.mp3",
+    "radha.mp3",
+    "meerabai.mp3",
+    "surdas.mp3",
+    "karmabai.mp3",
+    "budh-kalki.mp3",
+    "mahaarti.mp3",
+    "chalo-sakhi.mp3"
 ];
+
 
 
 /* =====================================================
