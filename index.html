@@ -1,2476 +1,610 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Janmashtami 2026 | Cultural Evening</title>
+    <title>Janmashtami 2026 | Cultural Evening</title>
 
-<style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --bg: #09090b;
-    --card: #111114;
-    --card-hover: #1d1d22;
-    --border: #29292f;
-    --text: #f5f5f5;
-    --muted: #85858f;
-    --accent: #ffffff;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            #25252b 0%,
-            #0b0b0d 38%,
-            #050506 100%
-        );
-
-    color: var(--text);
-
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    padding: 24px;
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: auto;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.header {
-    text-align: center;
-    padding: 15px 0 28px;
-}
-
-.header .eyebrow {
-    color: var(--muted);
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 10px;
-}
-
-.header h1 {
-    font-size: clamp(27px, 5vw, 42px);
-
-    line-height: 1.1;
-
-    font-weight: 700;
-
-    letter-spacing: -1px;
-}
-
-.header p {
-    color: var(--muted);
-
-    font-size: 14px;
-
-    margin-top: 9px;
-}
-
-
-/* =====================================================
-   PLAYER CARD
-===================================================== */
-
-.player-card {
-    background: rgba(17, 17, 20, 0.96);
-
-    border: 1px solid var(--border);
-
-    border-radius: 22px;
-
-    padding: 27px;
-
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.38);
-}
-
-
-/* =====================================================
-   NOW PLAYING
-===================================================== */
-
-.now-playing {
-    text-align: center;
-
-    margin-bottom: 24px;
-}
-
-.now-label {
-    color: var(--muted);
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    text-transform: uppercase;
-
-    margin-bottom: 9px;
-}
-
-.song-title {
-    font-size: clamp(19px, 4vw, 26px);
-
-    line-height: 1.3;
-
-    font-weight: 650;
-
-    word-break: break-word;
-}
-
-.song-number {
-    color: var(--muted);
-
-    font-size: 12px;
-
-    margin-top: 7px;
-}
-
-
-/* =====================================================
-   PROGRESS
-===================================================== */
-
-.progress-wrapper {
-    width: 100%;
-
-    padding: 10px 0;
-
-    user-select: none;
-}
-
-.progress-track {
-    position: relative;
-
-    width: 100%;
-
-    height: 7px;
-
-    background: #303035;
-
-    border-radius: 20px;
-
-    cursor: pointer;
-
-    touch-action: none;
-}
-
-.progress-bar {
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 0%;
-
-    height: 100%;
-
-    background: #fff;
-
-    border-radius: 20px;
-
-    pointer-events: none;
-}
-
-.progress-thumb {
-    position: absolute;
-
-    left: 0;
-    top: 50%;
-
-    width: 15px;
-    height: 15px;
-
-    background: #fff;
-
-    border-radius: 50%;
-
-    transform: translate(-50%, -50%);
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    box-shadow:
-        0 0 0 3px rgba(255,255,255,0.08);
-
-    transition: opacity 0.12s;
-}
-
-.progress-track:hover .progress-thumb,
-.progress-track.dragging .progress-thumb {
-    opacity: 1;
-}
-
-.progress-track.dragging {
-    cursor: grabbing;
-}
-
-.time-row {
-    display: flex;
-
-    justify-content: space-between;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
-    margin-top: 7px;
-}
-
-
-/* =====================================================
-   MAIN CONTROLS
-===================================================== */
-
-.controls {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 12px;
-
-    margin: 22px 0;
-}
-
-.control {
-    width: 46px;
-    height: 46px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 50%;
-
-    border: 1px solid var(--border);
-
-    background: #222226;
-
-    color: white;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s,
-        transform 0.15s;
-}
-
-.control:hover {
-    background: #303035;
-
-    transform: translateY(-1px);
-}
-
-.control:active {
-    transform: scale(0.95);
-}
-
-.play {
-    width: 62px;
-    height: 62px;
-
-    background: #fff;
-
-    color: #000;
-
-    border: none;
-
-    font-size: 21px;
-}
-
-.play:hover {
-    background: #dedede;
-}
-
-
-/* =====================================================
-   SVG ICON
-===================================================== */
-
-.icon {
-    width: 19px;
-    height: 19px;
-
-    fill: none;
-
-    stroke: currentColor;
-
-    stroke-width: 2;
-
-    stroke-linecap: round;
-
-    stroke-linejoin: round;
-}
-
-.play .icon {
-    width: 22px;
-    height: 22px;
-}
-
-
-/* =====================================================
-   SECONDARY CONTROLS
-===================================================== */
-
-.secondary {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 9px;
-
-    flex-wrap: wrap;
-
-    margin-top: 4px;
-}
-
-.small-btn,
-.speed,
-.volume-wrapper {
-    height: 36px;
-
-    border: 1px solid var(--border);
-
-    background: #1b1b1f;
-
-    color: #ddd;
-
-    border-radius: 9px;
-}
-
-.small-btn {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 0 12px;
-
-    cursor: pointer;
-
-    transition: 0.15s;
-}
-
-.small-btn:hover {
-    background: #29292e;
-}
-
-.small-btn.active {
-    background: #fff;
-
-    color: #000;
-
-    border-color: #fff;
-}
-
-.small-btn .icon {
-    width: 15px;
-    height: 15px;
-}
-
-.speed {
-    padding: 0 9px;
-
-    outline: none;
-
-    cursor: pointer;
-}
-
-.volume-wrapper {
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 0 10px;
-}
-
-.icon-btn {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 25px;
-    height: 25px;
-
-    border: none;
-
-    background: transparent;
-
-    color: white;
-
-    cursor: pointer;
-}
-
-.volume {
-    width: 90px;
-
-    accent-color: white;
-
-    cursor: pointer;
-}
-
-
-/* =====================================================
-   PLAYLIST CARD
-===================================================== */
-
-.playlist-card {
-    margin-top: 20px;
-
-    background: rgba(17,17,20,0.96);
-
-    border: 1px solid var(--border);
-
-    border-radius: 22px;
-
-    padding: 20px;
-}
-
-.playlist-top {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 15px;
-}
-
-.playlist-title {
-    font-size: 18px;
-
-    font-weight: 650;
-}
-
-.song-count {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.search {
-    width: 100%;
-
-    background: #0c0c0f;
-
-    color: white;
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    padding: 11px 13px;
-
-    outline: none;
-
-    margin-bottom: 12px;
-
-    font-size: 13px;
-
-    transition: border 0.15s;
-}
-
-.search:focus {
-    border-color: #55555c;
-}
-
-.search::placeholder {
-    color: #66666f;
-}
-
-
-/* =====================================================
-   PLAYLIST
-===================================================== */
-
-.playlist {
-    max-height: 500px;
-
-    overflow-y: auto;
-
-    padding-right: 3px;
-}
-
-.playlist::-webkit-scrollbar {
-    width: 5px;
-}
-
-.playlist::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.playlist::-webkit-scrollbar-thumb {
-    background: #333338;
-
-    border-radius: 10px;
-}
-
-.song {
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    padding: 12px 11px;
-
-    border-radius: 10px;
-
-    margin-bottom: 3px;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s;
-}
-
-.song:hover {
-    background: var(--card-hover);
-}
-
-.song.active {
-    background: #29292e;
-}
-
-.song-number {
-    width: 31px;
-
-    color: #777780;
-
-    font-size: 12px;
-
-    text-align: center;
-
-    flex-shrink: 0;
-}
-
-.song.active .song-number {
-    color: white;
-}
-
-.song-info {
-    flex: 1;
-
-    min-width: 0;
-}
-
-.song-name {
-    font-size: 14px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.song-status {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #777780;
-
-    flex-shrink: 0;
-}
-
-.song-status .icon {
-    width: 15px;
-    height: 15px;
-}
-
-.song.active .song-status {
-    color: white;
-}
-
-
-/* =====================================================
-   EMPTY
-===================================================== */
-
-.empty {
-    text-align: center;
-
-    color: var(--muted);
-
-    padding: 30px 10px;
-
-    font-size: 13px;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-.footer {
-    text-align: center;
-
-    color: #62626b;
-
-    font-size: 11px;
-
-    margin-top: 18px;
-
-    padding-bottom: 10px;
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 12px;
-    }
-
-    .header {
-        padding-top: 9px;
-    }
-
-    .player-card,
-    .playlist-card {
-        border-radius: 17px;
-
-        padding: 17px;
-    }
-
-    .controls {
-        gap: 7px;
-    }
-
-    .control {
-        width: 42px;
-        height: 42px;
-    }
-
-    .play {
-        width: 56px;
-        height: 56px;
-    }
-
-    .secondary {
-        gap: 7px;
-    }
-
-    .volume {
-        width: 70px;
-    }
-
-    .playlist {
-        max-height: 55vh;
-    }
-}
-
-</style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+    <div class="container">
 
-<div class="container">
+        <!-- =================================================
+             HEADER
+        ================================================== -->
 
+        <header class="header">
 
-    <!-- =================================================
-         HEADER
-    ================================================== -->
-
-    <header class="header">
-
-        <div class="eyebrow">
-            School Cultural Programme
-        </div>
-
-        <h1>
-            JANMASHTAMI 2026
-        </h1>
-
-        <p>
-            Cultural Evening • Music Practice Player
-        </p>
-
-    </header>
-
-
-    <!-- =================================================
-         PLAYER
-    ================================================== -->
-
-    <section class="player-card">
-
-
-        <div class="now-playing">
-
-            <div class="now-label">
-                Now Playing
+            <div class="eyebrow">
+                School Cultural Programme
             </div>
+
+            <h1>
+                JANMASHTAMI 2026
+            </h1>
+
+            <p>
+                Cultural Evening • Music Practice Player
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             PLAYER
+        ================================================== -->
+
+        <section class="player-card">
+
+            <!-- NOW PLAYING -->
+
+            <div class="now-playing">
+
+                <div class="now-label">
+                    Now Playing
+                </div>
+
+                <div
+                    class="song-title"
+                    id="songTitle"
+                >
+                    Select a song
+                </div>
+
+                <div
+                    class="song-number"
+                    id="songNumber"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROGRESS
+            ================================================== -->
 
             <div
-                class="song-title"
-                id="songTitle"
+                class="progress-wrapper"
+                id="progressWrapper"
             >
-                Select a song
+
+                <div
+                    class="progress-track"
+                    id="progressTrack"
+                >
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar"
+                    ></div>
+
+                    <div
+                        class="progress-thumb"
+                        id="progressThumb"
+                    ></div>
+
+                </div>
+
+                <div class="time-row">
+
+                    <span id="currentTime">
+                        0:00
+                    </span>
+
+                    <span id="duration">
+                        0:00
+                    </span>
+
+                </div>
+
             </div>
 
-            <div
-                class="song-number"
-                id="songNumber"
-            >
-                -
-            </div>
-
-        </div>
 
 
-        <!-- PROGRESS -->
 
-        <div
-            class="progress-wrapper"
-            id="progressWrapper"
+<!-- =================================================
+     AUDIO LEVEL METER
+================================================== -->
+
+<div class="audio-meter">
+
+    <div class="meter-header">
+        <span class="meter-title">Audio Level</span>
+        <span
+            class="clipping-indicator"
+            id="clippingIndicator"
         >
+            CLIPPING
+        </span>
+    </div>
+
+    <!-- LEFT CHANNEL -->
+
+    <div class="meter-channel">
+
+        <div class="meter-label">
+            <span>L</span>
+            <span
+                class="meter-db"
+                id="leftDb"
+            >
+                -60 dB
+            </span>
+        </div>
+
+        <div class="meter-track">
 
             <div
-                class="progress-track"
-                id="progressTrack"
-            >
+                class="meter-level"
+                id="leftLevel"
+            ></div>
 
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
-
-                <div
-                    class="progress-thumb"
-                    id="progressThumb"
-                ></div>
-
-            </div>
-
-            <div class="time-row">
-
-                <span id="currentTime">
-                    0:00
-                </span>
-
-                <span id="duration">
-                    0:00
-                </span>
-
-            </div>
+            <div
+                class="meter-peak"
+                id="leftPeak"
+            ></div>
 
         </div>
 
-
-        <!-- MAIN CONTROLS -->
-
-        <div class="controls">
+    </div>
 
 
-            <!-- PREVIOUS -->
+    <!-- RIGHT CHANNEL -->
 
-            <button
-                class="control"
-                id="previousBtn"
-                title="Previous song"
-                aria-label="Previous song"
+    <div class="meter-channel">
+
+        <div class="meter-label">
+            <span>R</span>
+            <span
+                class="meter-db"
+                id="rightDb"
             >
+                -60 dB
+            </span>
+        </div>
 
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
+        <div class="meter-track">
 
-                    <polygon
-                        points="19 20 9 12 19 4 19 20"
-                        fill="currentColor"
-                        stroke="none"
-                    />
+            <div
+                class="meter-level"
+                id="rightLevel"
+            ></div>
 
-                    <line
-                        x1="5"
-                        y1="5"
-                        x2="5"
-                        y2="19"
-                    />
-
-                </svg>
-
-            </button>
-
-
-            <!-- BACK 10 -->
-
-            <button
-                class="control"
-                id="backBtn"
-                title="10 seconds backward"
-                aria-label="10 seconds backward"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <path d="M9 14l-4-4 4-4"/>
-
-                    <path d="M5 10h7a6 6 0 1 1-4.24 10.24"/>
-
-                    <text
-                        x="10"
-                        y="14"
-                        font-size="6"
-                        fill="currentColor"
-                        stroke="none"
-                    >
-                        10
-                    </text>
-
-                </svg>
-
-            </button>
-
-
-            <!-- PLAY -->
-
-            <button
-                class="control play"
-                id="playBtn"
-                title="Play"
-                aria-label="Play"
-            >
-
-                <svg
-                    class="icon"
-                    id="playIcon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <polygon
-                        points="8,5 19,12 8,19"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                </svg>
-
-            </button>
-
-
-            <!-- FORWARD 10 -->
-
-            <button
-                class="control"
-                id="forwardBtn"
-                title="10 seconds forward"
-                aria-label="10 seconds forward"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <path d="M15 14l4-4-4-4"/>
-
-                    <path d="M19 10h-7a6 6 0 1 0 4.24 10.24"/>
-
-                    <text
-                        x="8"
-                        y="14"
-                        font-size="6"
-                        fill="currentColor"
-                        stroke="none"
-                    >
-                        10
-                    </text>
-
-                </svg>
-
-            </button>
-
-
-            <!-- NEXT -->
-
-            <button
-                class="control"
-                id="nextBtn"
-                title="Next song"
-                aria-label="Next song"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <polygon
-                        points="5 4 15 12 5 20 5 4"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                    <line
-                        x1="19"
-                        y1="5"
-                        x2="19"
-                        y2="19"
-                    />
-
-                </svg>
-
-            </button>
-
+            <div
+                class="meter-peak"
+                id="rightPeak"
+            ></div>
 
         </div>
 
+    </div>
 
-        <!-- SECONDARY CONTROLS -->
+    <div class="meter-scale">
+        <span>-60</span>
+        <span>-48</span>
+        <span>-36</span>
+        <span>-24</span>
+        <span>-12</span>
+        <span>0 dBFS</span>
+    </div>
 
-        <div class="secondary">
+</div>
 
+            <!-- =================================================
+                 MAIN CONTROLS
+            ================================================== -->
 
-            <!-- REPEAT -->
+            <div class="controls">
 
-            <button
-                class="small-btn"
-                id="repeatBtn"
-                title="Repeat current song"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <polyline points="17 1 21 5 17 9"/>
-
-                    <path
-                        d="M3 11V9a4 4 0 0 1 4-4h14"
-                    />
-
-                    <polyline points="7 23 3 19 7 15"/>
-
-                    <path
-                        d="M21 13v2a4 4 0 0 1-4 4H3"
-                    />
-
-                </svg>
-
-                <span>
-                    Repeat
-                </span>
-
-            </button>
-
-
-            <!-- SHUFFLE -->
-
-            <button
-                class="small-btn"
-                id="shuffleBtn"
-                title="Shuffle"
-            >
-
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <polyline points="16 3 21 3 21 8"/>
-
-                    <line x1="4" y1="20" x2="21" y2="3"/>
-
-                    <polyline points="21 16 21 21 16 21"/>
-
-                    <line x1="15" y1="15" x2="21" y2="21"/>
-
-                    <line x1="4" y1="4" x2="9" y2="9"/>
-
-                </svg>
-
-                <span>
-                    Shuffle
-                </span>
-
-            </button>
-
-
-            <!-- SPEED -->
-
-            <select
-                class="speed"
-                id="speed"
-                title="Playback speed"
-            >
-
-                <option value="0.5">
-                    0.5x
-                </option>
-
-                <option value="0.75">
-                    0.75x
-                </option>
-
-                <option
-                    value="1"
-                    selected
-                >
-                    1x
-                </option>
-
-                <option value="1.25">
-                    1.25x
-                </option>
-
-                <option value="1.5">
-                    1.5x
-                </option>
-
-                <option value="2">
-                    2x
-                </option>
-
-            </select>
-
-
-            <!-- VOLUME -->
-
-            <div class="volume-wrapper">
+                <!-- PREVIOUS -->
 
                 <button
-                    id="muteBtn"
-                    class="icon-btn"
-                    title="Mute"
-                    aria-label="Mute"
+                    class="control"
+                    id="previousBtn"
+                    title="Previous song"
+                    aria-label="Previous song"
                 >
 
                     <svg
                         class="icon"
-                        id="volumeIcon"
                         viewBox="0 0 24 24"
                     >
 
                         <polygon
-                            points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                            points="19 20 9 12 19 4 19 20"
                             fill="currentColor"
                             stroke="none"
                         />
 
-                        <path
-                            d="M15 9a4 4 0 0 1 0 6"
-                        />
-
-                        <path
-                            d="M18 6a8 8 0 0 1 0 12"
+                        <line
+                            x1="5"
+                            y1="5"
+                            x2="5"
+                            y2="19"
                         />
 
                     </svg>
 
                 </button>
 
-                <input
-                    class="volume"
-                    id="volume"
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    value="1"
-                    aria-label="Volume"
+
+                <!-- BACK 10 -->
+
+                <button
+                    class="control"
+                    id="backBtn"
+                    title="10 seconds backward"
+                    aria-label="10 seconds backward"
                 >
 
-            </div>
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                    >
 
+                        <path d="M9 14l-4-4 4-4"/>
 
-        </div>
+                        <path d="M5 10h7a6 6 0 1 1-4.24 10.24"/>
 
-    </section>
+                        <text
+                            x="10"
+                            y="14"
+                            font-size="6"
+                            fill="currentColor"
+                            stroke="none"
+                        >
+                            10
+                        </text>
 
+                    </svg>
 
-    <!-- =================================================
-         PLAYLIST
-    ================================================== -->
+                </button>
 
-    <section class="playlist-card">
 
+                <!-- PLAY -->
 
-        <div class="playlist-top">
-
-            <div class="playlist-title">
-                Playlist
-            </div>
-
-            <div
-                class="song-count"
-                id="songCount"
-            >
-                0 songs
-            </div>
-
-        </div>
-
-
-        <!-- SEARCH -->
-
-        <input
-            type="text"
-            class="search"
-            id="search"
-            placeholder="Search songs..."
-            autocomplete="off"
-        >
-
-
-        <!-- SONG LIST -->
-
-        <div
-            class="playlist"
-            id="playlist"
-        ></div>
-
-
-    </section>
-
-
-    <div class="footer">
-        Janmashtami 2026 • Cultural Evening
-    </div>
-
-
-</div>
-
-
-<!-- =====================================================
-     AUDIO
-====================================================== -->
-
-<audio id="audio"></audio>
-
-
-<script>
-
-
-/* =====================================================
-   SONG LIST
-=====================================================
-
-   Put all MP3 files inside:
-
-   audio/
-
-   The filenames below must match exactly.
-===================================================== */
-
-const songs = [
-    "vaman-avatar.mp3",
-    "balram-krishna.mp3",
-    "brahmand-darshan.mp3",
-    "radha.mp3",
-    "chalo-sakhi.mp3",
-    "holi.mp3",
-    "maharas.mp3",
-    "dahi-handi.mp3",
-    "dance-class-1-3.mp3",
-    "akroor-yashoda.mp3",
-    "kans-krishna.mp3",
-    "kubja.mp3",
-    "shishupal.mp3",
-    "shakuni-duryodhan.mp3",
-    "krishna-draupadi.mp3",
-    "cheer-haran.mp3",
-    "shanti-doot.mp3",
-    "geeta-updesh.mp3",
-    "gandhari-shraap.mp3",
-    "karmabai.mp3",
-    "surdas.mp3",
-    "meerabai.mp3"
-];
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const audio =
-    document.getElementById("audio");
-
-const songTitle =
-    document.getElementById("songTitle");
-
-const songNumber =
-    document.getElementById("songNumber");
-
-const playBtn =
-    document.getElementById("playBtn");
-
-const playIcon =
-    document.getElementById("playIcon");
-
-const previousBtn =
-    document.getElementById("previousBtn");
-
-const nextBtn =
-    document.getElementById("nextBtn");
-
-const backBtn =
-    document.getElementById("backBtn");
-
-const forwardBtn =
-    document.getElementById("forwardBtn");
-
-const progressTrack =
-    document.getElementById("progressTrack");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const progressThumb =
-    document.getElementById("progressThumb");
-
-const currentTime =
-    document.getElementById("currentTime");
-
-const duration =
-    document.getElementById("duration");
-
-const playlist =
-    document.getElementById("playlist");
-
-const songCount =
-    document.getElementById("songCount");
-
-const search =
-    document.getElementById("search");
-
-const repeatBtn =
-    document.getElementById("repeatBtn");
-
-const shuffleBtn =
-    document.getElementById("shuffleBtn");
-
-const speed =
-    document.getElementById("speed");
-
-const volume =
-    document.getElementById("volume");
-
-const muteBtn =
-    document.getElementById("muteBtn");
-
-const volumeIcon =
-    document.getElementById("volumeIcon");
-
-
-/* =====================================================
-   STATE
-===================================================== */
-
-let currentSong = 0;
-
-let repeat = false;
-
-let shuffle = false;
-
-let isDragging = false;
-
-let previousVolume = 1;
-
-
-/* =====================================================
-   PLAY ICONS
-===================================================== */
-
-const PLAY_ICON = `
-    <polygon
-        points="8,5 19,12 8,19"
-        fill="currentColor"
-        stroke="none"
-    />
-`;
-
-const PAUSE_ICON = `
-    <rect
-        x="7"
-        y="5"
-        width="4"
-        height="14"
-        rx="1"
-        fill="currentColor"
-        stroke="none"
-    />
-
-    <rect
-        x="13"
-        y="5"
-        width="4"
-        height="14"
-        rx="1"
-        fill="currentColor"
-        stroke="none"
-    />
-`;
-
-
-/* =====================================================
-   VOLUME ICONS
-===================================================== */
-
-const VOLUME_ICON = `
-    <polygon
-        points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
-        fill="currentColor"
-        stroke="none"
-    />
-
-    <path d="M15 9a4 4 0 0 1 0 6"/>
-
-    <path d="M18 6a8 8 0 0 1 0 12"/>
-`;
-
-const MUTE_ICON = `
-    <polygon
-        points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
-        fill="currentColor"
-        stroke="none"
-    />
-
-    <line x1="16" y1="9" x2="21" y2="15"/>
-
-    <line x1="21" y1="9" x2="16" y2="15"/>
-`;
-
-
-/* =====================================================
-   CREATE PLAYLIST
-===================================================== */
-
-function createPlaylist(filter = "") {
-
-    playlist.innerHTML = "";
-
-    const query =
-        filter.toLowerCase().trim();
-
-    const filteredSongs =
-        songs
-        .map((song, index) => ({
-            song,
-            index
-        }))
-        .filter(item =>
-            item.song
-                .toLowerCase()
-                .includes(query)
-        );
-
-
-    songCount.textContent =
-        `${filteredSongs.length} / ${songs.length} songs`;
-
-
-    if (filteredSongs.length === 0) {
-
-        playlist.innerHTML = `
-            <div class="empty">
-                No songs found
-            </div>
-        `;
-
-        return;
-    }
-
-
-    filteredSongs.forEach(item => {
-
-        const row =
-            document.createElement("div");
-
-        row.className = "song";
-
-
-        if (item.index === currentSong) {
-
-            row.classList.add("active");
-
-        }
-
-
-        const number =
-            String(item.index + 1)
-                .padStart(2, "0");
-
-
-        const statusIcon =
-            item.index === currentSong &&
-            !audio.paused
-
-            ? `
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
+                <button
+                    class="control play"
+                    id="playBtn"
+                    title="Play"
+                    aria-label="Play"
                 >
 
-                    <rect
-                        x="7"
-                        y="5"
-                        width="4"
-                        height="14"
-                        rx="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
+                    <svg
+                        class="icon"
+                        id="playIcon"
+                        viewBox="0 0 24 24"
+                    >
 
-                    <rect
-                        x="13"
-                        y="5"
-                        width="4"
-                        height="14"
-                        rx="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
+                        <polygon
+                            points="8,5 19,12 8,19"
+                            fill="currentColor"
+                            stroke="none"
+                        />
 
-                </svg>
-              `
+                    </svg>
 
-            : `
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
+                </button>
+
+
+                <!-- FORWARD 10 -->
+
+                <button
+                    class="control"
+                    id="forwardBtn"
+                    title="10 seconds forward"
+                    aria-label="10 seconds forward"
                 >
 
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="3"
-                        fill="currentColor"
-                        stroke="none"
-                    />
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                    >
 
-                </svg>
-              `;
+                        <path d="M15 14l4-4-4-4"/>
+
+                        <path d="M19 10h-7a6 6 0 1 0 4.24 10.24"/>
+
+                        <text
+                            x="8"
+                            y="14"
+                            font-size="6"
+                            fill="currentColor"
+                            stroke="none"
+                        >
+                            10
+                        </text>
+
+                    </svg>
+
+                </button>
 
 
-        row.innerHTML = `
+                <!-- NEXT -->
 
-            <div class="song-number">
-                ${number}
+                <button
+                    class="control"
+                    id="nextBtn"
+                    title="Next song"
+                    aria-label="Next song"
+                >
+
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <polygon
+                            points="5 4 15 12 5 20 5 4"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+
+                        <line
+                            x1="19"
+                            y1="5"
+                            x2="19"
+                            y2="19"
+                        />
+
+                    </svg>
+
+                </button>
+
             </div>
 
-            <div class="song-info">
 
-                <div class="song-name">
-                    ${escapeHTML(
-                        removeExtension(item.song)
-                    )}
+            <!-- =================================================
+                 SECONDARY CONTROLS
+            ================================================== -->
+
+            <div class="secondary">
+
+                <!-- REPEAT -->
+
+                <button
+                    class="small-btn"
+                    id="repeatBtn"
+                    title="Repeat current song"
+                >
+
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <polyline points="17 1 21 5 17 9"/>
+
+                        <path
+                            d="M3 11V9a4 4 0 0 1 4-4h14"
+                        />
+
+                        <polyline points="7 23 3 19 7 15"/>
+
+                        <path
+                            d="M21 13v2a4 4 0 0 1-4 4H3"
+                        />
+
+                    </svg>
+
+                    <span>
+                        Repeat
+                    </span>
+
+                </button>
+
+
+                <!-- SHUFFLE -->
+
+                <button
+                    class="small-btn"
+                    id="shuffleBtn"
+                    title="Shuffle"
+                >
+
+                    <svg
+                        class="icon"
+                        viewBox="0 0 24 24"
+                    >
+
+                        <polyline points="16 3 21 3 21 8"/>
+
+                        <line
+                            x1="4"
+                            y1="20"
+                            x2="21"
+                            y2="3"
+                        />
+
+                        <polyline points="21 16 21 21 16 21"/>
+
+                        <line
+                            x1="15"
+                            y1="15"
+                            x2="21"
+                            y2="21"
+                        />
+
+                        <line
+                            x1="4"
+                            y1="4"
+                            x2="9"
+                            y2="9"
+                        />
+
+                    </svg>
+
+                    <span>
+                        Shuffle
+                    </span>
+
+                </button>
+
+
+                <!-- SPEED -->
+
+                <select
+                    class="speed"
+                    id="speed"
+                    title="Playback speed"
+                >
+
+                    <option value="0.5">
+                        0.5x
+                    </option>
+
+                    <option value="0.75">
+                        0.75x
+                    </option>
+
+                    <option
+                        value="1"
+                        selected
+                    >
+                        1x
+                    </option>
+
+                    <option value="1.25">
+                        1.25x
+                    </option>
+
+                    <option value="1.5">
+                        1.5x
+                    </option>
+
+                    <option value="2">
+                        2x
+                    </option>
+
+                </select>
+
+
+                <!-- VOLUME -->
+
+                <div class="volume-wrapper">
+
+                    <button
+                        id="muteBtn"
+                        class="icon-btn"
+                        title="Mute"
+                        aria-label="Mute"
+                    >
+
+                        <svg
+                            class="icon"
+                            id="volumeIcon"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <polygon
+                                points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+
+                            <path
+                                d="M15 9a4 4 0 0 1 0 6"
+                            />
+
+                            <path
+                                d="M18 6a8 8 0 0 1 0 12"
+                            />
+
+                        </svg>
+
+                    </button>
+
+                    <input
+                        class="volume"
+                        id="volume"
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value="1"
+                        aria-label="Volume"
+                    >
+
                 </div>
 
             </div>
 
-            <div class="song-status">
-                ${statusIcon}
+        </section>
+
+
+        <!-- =================================================
+             PLAYLIST
+        ================================================== -->
+
+        <section class="playlist-card">
+
+            <div class="playlist-top">
+
+                <div class="playlist-title">
+                    Playlist
+                </div>
+
+                <div
+                    class="song-count"
+                    id="songCount"
+                >
+                    0 songs
+                </div>
+
             </div>
 
-        `;
 
+            <!-- SEARCH -->
 
-        row.addEventListener(
-            "click",
-            () => {
+            <input
+                type="text"
+                class="search"
+                id="search"
+                placeholder="Search songs..."
+                autocomplete="off"
+            >
 
-                loadSong(item.index);
 
-                playSong();
+            <!-- SONG LIST -->
 
-            }
-        );
+            <div
+                class="playlist"
+                id="playlist"
+            ></div>
 
+        </section>
 
-        playlist.appendChild(row);
 
-    });
+        <!-- FOOTER -->
 
-}
+        <div class="footer">
+            Janmashtami 2026 • Cultural Evening
+        </div>
 
+    </div>
 
-/* =====================================================
-   LOAD SONG
-===================================================== */
 
-function loadSong(index) {
+    <!-- =================================================
+         AUDIO
+    ================================================== -->
 
-    if (index < 0) {
+    <audio id="audio"></audio>
 
-        index = songs.length - 1;
 
-    }
+    <!-- =================================================
+         JAVASCRIPT
+    ================================================== -->
 
-
-    if (index >= songs.length) {
-
-        index = 0;
-
-    }
-
-
-    currentSong = index;
-
-
-    const file =
-        songs[currentSong];
-
-
-    audio.src =
-        "audio/" +
-        encodeURIComponent(file);
-
-
-    songTitle.textContent =
-        removeExtension(file);
-
-
-    songNumber.textContent =
-        `Track ${
-            String(currentSong + 1)
-                .padStart(2, "0")
-        } of ${
-            String(songs.length)
-                .padStart(2, "0")
-        }`;
-
-
-    progressBar.style.width =
-        "0%";
-
-    progressThumb.style.left =
-        "0%";
-
-    currentTime.textContent =
-        "0:00";
-
-    duration.textContent =
-        "0:00";
-
-
-    createPlaylist(search.value);
-
-}
-
-
-/* =====================================================
-   PLAY
-===================================================== */
-
-function playSong() {
-
-    audio.play()
-        .then(() => {
-
-            playIcon.innerHTML =
-                PAUSE_ICON;
-
-            playBtn.setAttribute(
-                "aria-label",
-                "Pause"
-            );
-
-            createPlaylist(search.value);
-
-        })
-        .catch(error => {
-
-            console.log(
-                "Audio playback error:",
-                error
-            );
-
-        });
-
-}
-
-
-/* =====================================================
-   PAUSE
-===================================================== */
-
-function pauseSong() {
-
-    audio.pause();
-
-    playIcon.innerHTML =
-        PLAY_ICON;
-
-    playBtn.setAttribute(
-        "aria-label",
-        "Play"
-    );
-
-    createPlaylist(search.value);
-
-}
-
-
-/* =====================================================
-   PLAY / PAUSE
-===================================================== */
-
-playBtn.addEventListener(
-    "click",
-    () => {
-
-        if (audio.paused) {
-
-            playSong();
-
-        } else {
-
-            pauseSong();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   NEXT
-===================================================== */
-
-nextBtn.addEventListener(
-    "click",
-    () => {
-
-        if (shuffle) {
-
-            playRandomSong();
-
-        } else {
-
-            loadSong(
-                currentSong + 1
-            );
-
-            playSong();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   PREVIOUS
-===================================================== */
-
-previousBtn.addEventListener(
-    "click",
-    () => {
-
-        loadSong(
-            currentSong - 1
-        );
-
-        playSong();
-
-    }
-);
-
-
-/* =====================================================
-   BACK 10
-===================================================== */
-
-backBtn.addEventListener(
-    "click",
-    () => {
-
-        audio.currentTime =
-            Math.max(
-                0,
-                audio.currentTime - 10
-            );
-
-    }
-);
-
-
-/* =====================================================
-   FORWARD 10
-===================================================== */
-
-forwardBtn.addEventListener(
-    "click",
-    () => {
-
-        if (!audio.duration) return;
-
-        audio.currentTime =
-            Math.min(
-                audio.duration,
-                audio.currentTime + 10
-            );
-
-    }
-);
-
-
-/* =====================================================
-   PROGRESS UPDATE
-===================================================== */
-
-audio.addEventListener(
-    "timeupdate",
-    () => {
-
-        if (
-            !audio.duration ||
-            isDragging
-        ) return;
-
-
-        updateProgress(
-            audio.currentTime
-        );
-
-    }
-);
-
-
-function updateProgress(time) {
-
-    if (!audio.duration) return;
-
-
-    const percent =
-        (time / audio.duration) * 100;
-
-
-    progressBar.style.width =
-        percent + "%";
-
-
-    progressThumb.style.left =
-        percent + "%";
-
-
-    currentTime.textContent =
-        formatTime(time);
-
-}
-
-
-/* =====================================================
-   DURATION
-===================================================== */
-
-audio.addEventListener(
-    "loadedmetadata",
-    () => {
-
-        duration.textContent =
-            formatTime(
-                audio.duration
-            );
-
-    }
-);
-
-
-/* =====================================================
-   SEEK
-===================================================== */
-
-function seekFromPointer(clientX) {
-
-    if (!audio.duration) return;
-
-
-    const rect =
-        progressTrack.getBoundingClientRect();
-
-
-    let position =
-        clientX - rect.left;
-
-
-    position =
-        Math.max(
-            0,
-            Math.min(
-                position,
-                rect.width
-            )
-        );
-
-
-    const percent =
-        position / rect.width;
-
-
-    const newTime =
-        percent * audio.duration;
-
-
-    audio.currentTime =
-        newTime;
-
-
-    updateProgress(
-        newTime
-    );
-
-}
-
-
-/* =====================================================
-   MOUSE DRAG
-===================================================== */
-
-progressTrack.addEventListener(
-    "mousedown",
-    event => {
-
-        isDragging = true;
-
-        progressTrack.classList.add(
-            "dragging"
-        );
-
-        seekFromPointer(
-            event.clientX
-        );
-
-    }
-);
-
-
-document.addEventListener(
-    "mousemove",
-    event => {
-
-        if (!isDragging) return;
-
-        seekFromPointer(
-            event.clientX
-        );
-
-    }
-);
-
-
-document.addEventListener(
-    "mouseup",
-    () => {
-
-        if (!isDragging) return;
-
-        isDragging = false;
-
-        progressTrack.classList.remove(
-            "dragging"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   MOBILE TOUCH DRAG
-===================================================== */
-
-progressTrack.addEventListener(
-    "touchstart",
-    event => {
-
-        isDragging = true;
-
-        progressTrack.classList.add(
-            "dragging"
-        );
-
-        seekFromPointer(
-            event.touches[0].clientX
-        );
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-document.addEventListener(
-    "touchmove",
-    event => {
-
-        if (!isDragging) return;
-
-        seekFromPointer(
-            event.touches[0].clientX
-        );
-
-    },
-    {
-        passive: true
-    }
-);
-
-
-document.addEventListener(
-    "touchend",
-    () => {
-
-        if (!isDragging) return;
-
-        isDragging = false;
-
-        progressTrack.classList.remove(
-            "dragging"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   SONG ENDED
-=====================================================
-
-   IMPORTANT:
-   AUTO NEXT IS DISABLED.
-
-   If repeat is ON:
-   current song repeats.
-
-   If repeat is OFF:
-   playback stops.
-===================================================== */
-
-audio.addEventListener(
-    "ended",
-    () => {
-
-        if (repeat) {
-
-            audio.currentTime = 0;
-
-            playSong();
-
-            return;
-
-        }
-
-
-        pauseSong();
-
-        audio.currentTime =
-            audio.duration;
-
-
-        updateProgress(
-            audio.duration
-        );
-
-    }
-);
-
-
-/* =====================================================
-   REPEAT
-===================================================== */
-
-repeatBtn.addEventListener(
-    "click",
-    () => {
-
-        repeat =
-            !repeat;
-
-
-        repeatBtn.classList.toggle(
-            "active",
-            repeat
-        );
-
-    }
-);
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
-
-shuffleBtn.addEventListener(
-    "click",
-    () => {
-
-        shuffle =
-            !shuffle;
-
-
-        shuffleBtn.classList.toggle(
-            "active",
-            shuffle
-        );
-
-    }
-);
-
-
-/* =====================================================
-   RANDOM SONG
-===================================================== */
-
-function playRandomSong() {
-
-    if (songs.length <= 1) {
-
-        playSong();
-
-        return;
-
-    }
-
-
-    let random;
-
-
-    do {
-
-        random =
-            Math.floor(
-                Math.random() *
-                songs.length
-            );
-
-    } while (
-        random === currentSong
-    );
-
-
-    loadSong(random);
-
-    playSong();
-
-}
-
-
-/* =====================================================
-   SPEED
-===================================================== */
-
-speed.addEventListener(
-    "change",
-    () => {
-
-        audio.playbackRate =
-            Number(
-                speed.value
-            );
-
-    }
-);
-
-
-/* =====================================================
-   VOLUME
-===================================================== */
-
-volume.addEventListener(
-    "input",
-    () => {
-
-        audio.volume =
-            Number(
-                volume.value
-            );
-
-
-        if (audio.volume > 0) {
-
-            previousVolume =
-                audio.volume;
-
-            volumeIcon.innerHTML =
-                VOLUME_ICON;
-
-        } else {
-
-            volumeIcon.innerHTML =
-                MUTE_ICON;
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   MUTE
-===================================================== */
-
-muteBtn.addEventListener(
-    "click",
-    () => {
-
-        if (audio.volume > 0) {
-
-            previousVolume =
-                audio.volume;
-
-            audio.volume =
-                0;
-
-            volume.value =
-                0;
-
-            volumeIcon.innerHTML =
-                MUTE_ICON;
-
-        } else {
-
-            audio.volume =
-                previousVolume || 1;
-
-            volume.value =
-                audio.volume;
-
-            volumeIcon.innerHTML =
-                VOLUME_ICON;
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-search.addEventListener(
-    "input",
-    () => {
-
-        createPlaylist(
-            search.value
-        );
-
-    }
-);
-
-
-/* =====================================================
-   KEYBOARD SHORTCUTS
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        /*
-         Don't trigger shortcuts
-         while typing.
-        */
-
-        if (
-            document.activeElement === search
-        ) {
-
-            return;
-
-        }
-
-
-        /* SPACE */
-
-        if (
-            event.code === "Space"
-        ) {
-
-            event.preventDefault();
-
-            if (audio.paused) {
-
-                playSong();
-
-            } else {
-
-                pauseSong();
-
-            }
-
-        }
-
-
-        /* LEFT */
-
-        if (
-            event.code === "ArrowLeft"
-        ) {
-
-            event.preventDefault();
-
-            audio.currentTime =
-                Math.max(
-                    0,
-                    audio.currentTime - 10
-                );
-
-        }
-
-
-        /* RIGHT */
-
-        if (
-            event.code === "ArrowRight"
-        ) {
-
-            event.preventDefault();
-
-            if (!audio.duration) return;
-
-            audio.currentTime =
-                Math.min(
-                    audio.duration,
-                    audio.currentTime + 10
-                );
-
-        }
-
-
-        /* UP */
-
-        if (
-            event.code === "ArrowUp"
-        ) {
-
-            event.preventDefault();
-
-            audio.volume =
-                Math.min(
-                    1,
-                    audio.volume + 0.1
-                );
-
-            volume.value =
-                audio.volume;
-
-            if (audio.volume > 0) {
-
-                volumeIcon.innerHTML =
-                    VOLUME_ICON;
-
-            }
-
-        }
-
-
-        /* DOWN */
-
-        if (
-            event.code === "ArrowDown"
-        ) {
-
-            event.preventDefault();
-
-            audio.volume =
-                Math.max(
-                    0,
-                    audio.volume - 0.1
-                );
-
-            volume.value =
-                audio.volume;
-
-
-            if (audio.volume === 0) {
-
-                volumeIcon.innerHTML =
-                    MUTE_ICON;
-
-            }
-
-        }
-
-
-        /* N = NEXT */
-
-        if (
-            event.key.toLowerCase() === "n"
-        ) {
-
-            loadSong(
-                currentSong + 1
-            );
-
-            playSong();
-
-        }
-
-
-        /* P = PREVIOUS */
-
-        if (
-            event.key.toLowerCase() === "p"
-        ) {
-
-            loadSong(
-                currentSong - 1
-            );
-
-            playSong();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   HELPERS
-===================================================== */
-
-function formatTime(seconds) {
-
-    if (
-        !seconds ||
-        isNaN(seconds)
-    ) {
-
-        return "0:00";
-
-    }
-
-
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
-
-
-    const secondsPart =
-        Math.floor(
-            seconds % 60
-        )
-        .toString()
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return `${minutes}:${secondsPart}`;
-
-}
-
-
-function removeExtension(filename) {
-
-    return filename
-        .replace(
-            /\.[^/.]+$/,
-            ""
-        );
-
-}
-
-
-function escapeHTML(text) {
-
-    return text
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-audio.volume = 1;
-
-createPlaylist();
-
-loadSong(0);
-
-</script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
