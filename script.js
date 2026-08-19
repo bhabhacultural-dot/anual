@@ -28,8 +28,7 @@ const songs = [
     "buddh-kalki.mp3",
    "krishna-manch-agman.mp3",
    "madhurashtak.mp3",
-    "mahaarti.mp3",
-    "chalo-sakhi.mp3"
+    "mahaarti.mp3"
 ];
 
 
