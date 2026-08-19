@@ -24,16 +24,13 @@ const songs = [
     "geeta-updesh.mp3",
     "gandhari-shraap.mp3",
     "dwarika-vileen.mp3",
-    "vaman-avatar.mp3",
     "radha.mp3",
     "meerabai.mp3",
     "surdas.mp3",
     "karmabai.mp3",
     "buddh-kalki.mp3",
     "mahaarti.mp3",
-    "chalo-sakhi.mp3",
-   "dwarka-vileen.mp3",
-   "sudama.mp3"
+    "chalo-sakhi.mp3"
 ];
 
 
