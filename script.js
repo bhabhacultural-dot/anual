@@ -23,7 +23,7 @@ const songs = [
     "shanti-doot.mp3",
     "geeta-updesh.mp3",
     "gandhari-shraap.mp3",
-    "dwarika-vileen.mp3",
+    "dwarka-vileen.mp3",
     "radha.mp3",
     "meerabai.mp3",
     "surdas.mp3",
