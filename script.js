@@ -3,6 +3,7 @@
 ===================================================== */
 
 const songs = [
+    "ganesh-vandana.mp3",
     "ashtaavtaar.mp3",
     "krishna-janm.mp3",
     "dance-class-1-3.mp3",
@@ -26,8 +27,8 @@ const songs = [
     "dwarka-vileen.mp3",
     "krishna-bhakt.mp3",
     "buddh-kalki.mp3",
-   "krishna-manch-agman.mp3",
-   "madhurashtak.mp3",
+    "krishna-manch-agman.mp3",
+    "madhurashtak.mp3",
     "mahaarti.mp3"
 ];
 
