@@ -4,13 +4,12 @@
 
 const songs = [
     "ganesh-vandana.mp3",
+    "presentation-class-1-3.mp3",
     "ashtaavtaar.mp3",
     "krishna-janm.mp3",
     "dance-class-1-3.mp3",
     "brahmand-darshan.mp3",
     "dahi-handi.mp3",
-    "holi.mp3",
-    "maharas.mp3",
     "akroor-yashoda.mp3",
     "radha-krishna.mp3",
     "kubja.mp3",
@@ -20,7 +19,6 @@ const songs = [
     "shishupal.mp3",
     "krishna-draupadi.mp3",
     "shakuni-duryodhan.mp3",
-    "cheer-haran.mp3",
     "shanti-doot.mp3",
     "geeta-updesh.mp3",
     "gandhari-shraap.mp3",
@@ -31,7 +29,6 @@ const songs = [
     "madhurashtak.mp3",
     "mahaarti.mp3"
 ];
-
 
 
 /* =====================================================
