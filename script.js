@@ -19,6 +19,7 @@ const songs = [
     "shishupal.mp3",
     "krishna-draupadi.mp3",
     "shakuni-duryodhan.mp3",
+    "cheer-haran.mp3",
     "shanti-doot.mp3",
     "geeta-updesh.mp3",
     "gandhari-shraap.mp3",
