@@ -3,32 +3,31 @@
 ===================================================== */
 
 const songs = [
-  "01_ganesh-vandana.mp4",
-  "02_presentation-class-1-3.mp4",
-  "03_ashtaavtaar.mp4",
-  "04_krishna-janm.mp4",
-  "05_brahmand-darshan.mp4",
-  "06_dahi-handi.mp4",
-  "07_akroor-yashoda.mp4",
-  "08_radha-krishna.mp4",
-  "09_kubja.mp4",
-  "10_kans-krishna.mp4",
-  "11_balram-krishna.mp4",
-  "12_sudama.mp4",
-  "13_shishupal.mp4",
-  "14_krishna-draupadi.mp4",
-  "15_shakuni-duryodhan.mp4",
-  "16_cheer-haran.mp4",
-  "17_shanti-doot.mp4",
-  "18_geeta-updesh.mp4",
-  "19_gandhari-shraap.mp4",
-  "20_dwarka-vileen.mp4",
-  "21_krishna-bhakt.mp4",
-  "22_buddh-kalki.mp4",
-  "23_krishna-manch-hagman.mp4",
-  "24_madhurashtak.mp4"
+  "01_ganesh-vandana.mp3",
+  "02_presentation-class-1-3.mp3",
+  "03_ashtaavtaar.mp3",
+  "04_krishna-janm.mp3",
+  "05_brahmand-darshan.mp3",
+  "06_dahi-handi.mp3",
+  "07_akroor-yashoda.mp3",
+  "08_radha-krishna.mp3",
+  "09_kubja.mp3",
+  "10_kans-krishna.mp3",
+  "11_balram-krishna.mp3",
+  "12_sudama.mp3",
+  "13_shishupal.mp3",
+  "14_krishna-draupadi.mp3",
+  "15_shakuni-duryodhan.mp3",
+  "16_cheer-haran.mp3",
+  "17_shanti-doot.mp3",
+  "18_geeta-updesh.mp3",
+  "19_gandhari-shraap.mp3",
+  "20_dwarka-vileen.mp3",
+  "21_krishna-bhakt.mp3",
+  "22_buddh-kalki.mp3",
+  "23_krishna-manch-hagman.mp3",
+  "24_madhurashtak.mp3"
 ];
-
 /* =====================================================
    ELEMENTS
 ===================================================== */
