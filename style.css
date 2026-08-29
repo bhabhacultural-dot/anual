@@ -77,7 +77,7 @@ body {
 
 .header {
     text-align: center;
-    padding: 15px 0 28px;
+    padding: 15px 0 22px;
 }
 
 .header .eyebrow {
@@ -108,6 +108,231 @@ body {
     font-size: 14px;
 
     margin-top: 9px;
+}
+
+
+/* =====================================================
+   AUDIO / VISUAL MODE SWITCH
+===================================================== */
+
+.mode-switch {
+    display: flex;
+
+    width: fit-content;
+
+    margin: 0 auto 18px;
+
+    padding: 4px;
+
+    background: #111114;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    gap: 3px;
+}
+
+.mode-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 120px;
+
+    height: 38px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        transform 0.15s ease;
+}
+
+.mode-btn:hover {
+    color: var(--text);
+
+    background: #1b1b1f;
+}
+
+.mode-btn:active {
+    transform: scale(0.97);
+}
+
+.mode-btn.active {
+    background: #ffffff;
+
+    color: #000000;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.mode-icon {
+    font-size: 15px;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   VISUAL PLAYER CARD
+===================================================== */
+
+.visual-card {
+    background: rgba(17, 17, 20, 0.96);
+
+    border: 1px solid var(--border);
+
+    border-radius: 22px;
+
+    padding: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.38);
+
+    animation:
+        visualFadeIn 0.2s ease;
+}
+
+@keyframes visualFadeIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   VISUAL HEADER
+===================================================== */
+
+.visual-header {
+    text-align: center;
+
+    padding: 5px 0 16px;
+}
+
+.visual-label {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 8px;
+}
+
+.visual-title {
+    font-size: clamp(18px, 4vw, 25px);
+
+    line-height: 1.3;
+
+    font-weight: 650;
+
+    word-break: break-word;
+}
+
+.visual-number {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-top: 6px;
+}
+
+
+/* =====================================================
+   VIDEO WRAPPER
+===================================================== */
+
+.video-wrapper {
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    aspect-ratio: 16 / 9;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   VIDEO
+===================================================== */
+
+.video-player {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+
+/* =====================================================
+   VIDEO ERROR
+===================================================== */
+
+.video-error {
+    margin-top: 12px;
+
+    padding: 11px 13px;
+
+    border: 1px solid #3a2525;
+
+    border-radius: 9px;
+
+    background: #171011;
+
+    color: #b8a0a0;
+
+    text-align: center;
+
+    font-size: 12px;
 }
 
 
@@ -680,63 +905,12 @@ body {
 
 
 /* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    body {
-        padding: 12px;
-    }
-
-    .header {
-        padding-top: 9px;
-    }
-
-    .player-card,
-    .playlist-card {
-        border-radius: 17px;
-
-        padding: 17px;
-    }
-
-    .controls {
-        gap: 7px;
-    }
-
-    .control {
-        width: 42px;
-        height: 42px;
-    }
-
-    .play {
-        width: 56px;
-        height: 56px;
-    }
-
-    .secondary {
-        gap: 7px;
-    }
-
-    .volume {
-        width: 70px;
-    }
-
-    .playlist {
-        max-height: 55vh;
-    }
-}
-
-
-
-
-
-/* =====================================================
    AUDIO LEVEL METER
 ===================================================== */
 
 .audio-meter {
     margin-top: 20px;
+
     padding: 16px;
 
     background: #0c0c0f;
@@ -745,9 +919,6 @@ body {
 
     border-radius: 14px;
 }
-
-
-/* METER HEADER */
 
 .meter-header {
     display: flex;
@@ -792,11 +963,9 @@ body {
 
     opacity: 1;
 
-    animation: clippingBlink 0.5s infinite alternate;
+    animation:
+        clippingBlink 0.5s infinite alternate;
 }
-
-
-/* CHANNEL */
 
 .meter-channel {
     margin-bottom: 10px;
@@ -821,9 +990,6 @@ body {
 
     font-variant-numeric: tabular-nums;
 }
-
-
-/* TRACK */
 
 .meter-track {
     position: relative;
@@ -850,12 +1016,6 @@ body {
         );
 }
 
-
-/*
-   Dark overlay creates the "empty" part.
-   The actual level is revealed from left to right.
-*/
-
 .meter-level {
     position: absolute;
 
@@ -870,9 +1030,6 @@ body {
 
     pointer-events: none;
 }
-
-
-/* PEAK HOLD */
 
 .meter-peak {
     position: absolute;
@@ -895,9 +1052,6 @@ body {
     pointer-events: none;
 }
 
-
-/* SCALE */
-
 .meter-scale {
     display: flex;
 
@@ -911,9 +1065,6 @@ body {
 
     font-variant-numeric: tabular-nums;
 }
-
-
-/* CLIPPING */
 
 @keyframes clippingBlink {
 
@@ -929,10 +1080,68 @@ body {
 
 
 /* =====================================================
-   MOBILE METER
+   MOBILE
 ===================================================== */
 
 @media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .header {
+        padding-top: 9px;
+    }
+
+    .mode-switch {
+        width: 100%;
+
+        max-width: 330px;
+    }
+
+    .mode-btn {
+        flex: 1;
+
+        min-width: 0;
+    }
+
+    .visual-card,
+    .player-card,
+    .playlist-card {
+        border-radius: 17px;
+
+        padding: 17px;
+    }
+
+    .video-wrapper {
+        border-radius: 11px;
+    }
+
+    .controls {
+        gap: 7px;
+    }
+
+    .control {
+        width: 42px;
+        height: 42px;
+    }
+
+    .play {
+        width: 56px;
+        height: 56px;
+    }
+
+    .secondary {
+        gap: 7px;
+    }
+
+    .volume {
+        width: 70px;
+    }
+
+    .playlist {
+        max-height: 55vh;
+    }
 
     .audio-meter {
         padding: 13px;
@@ -950,4 +1159,13 @@ body {
         font-size: 7px;
     }
 
+}
+
+
+/* =====================================================
+   HIDDEN ATTRIBUTE
+===================================================== */
+
+[hidden] {
+    display: none !important;
 }
