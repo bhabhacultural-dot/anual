@@ -93,7 +93,7 @@ const videos = {
 
     "03_ashtaavtaar.mp3": {
         local: "videos/03_ashtaavtaar.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787977965/03_ashtavatar_bacij2.mp4"
     },
 
     "04_krishna-janm.mp3": {
