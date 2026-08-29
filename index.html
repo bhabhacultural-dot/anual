@@ -35,12 +35,100 @@
 
         </header>
 
+<!-- ================================================= 
+     MODE SWITCH 
+================================================== --> 
+
+<div class="mode-switch"> 
+
+    <button 
+        class="mode-btn active" 
+        id="visualModeBtn" 
+        type="button" 
+    > 
+        <span class="mode-icon">▶</span> 
+        <span>Visuals</span> 
+    </button> 
+
+    <button 
+        class="mode-btn" 
+        id="audioModeBtn" 
+        type="button" 
+    > 
+        <span class="mode-icon">♫</span> 
+        <span>Audio</span> 
+    </button> 
+
+</div>
+
 
         <!-- =================================================
-             PLAYER
+             VISUAL PLAYER
         ================================================== -->
 
-        <section class="player-card">
+        <section
+            class="visual-card"
+            id="visualCard"
+            hidden
+        >
+
+            <div class="visual-header">
+
+                <div class="visual-label">
+                    Now Playing
+                </div>
+
+                <div
+                    class="visual-title"
+                    id="visualTitle"
+                >
+                    Select a visual
+                </div>
+
+                <div
+                    class="visual-number"
+                    id="visualNumber"
+                >
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="video-wrapper">
+
+                <video
+                    id="video"
+                    class="video-player"
+                    controls
+                    playsinline
+                    preload="metadata"
+                >
+                    Your browser does not support HTML5 video.
+                </video>
+
+            </div>
+
+
+            <div
+                class="video-error"
+                id="videoError"
+                hidden
+            >
+                Visual unavailable. Please use Audio mode.
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AUDIO PLAYER
+        ================================================== -->
+
+        <section
+            class="player-card"
+            id="audioCard"
+        >
 
             <!-- NOW PLAYING -->
 
@@ -108,95 +196,109 @@
             </div>
 
 
+            <!-- =================================================
+                 AUDIO LEVEL METER
+            ================================================== -->
+
+            <div class="audio-meter">
+
+                <div class="meter-header">
+
+                    <span class="meter-title">
+                        Audio Level
+                    </span>
+
+                    <span
+                        class="clipping-indicator"
+                        id="clippingIndicator"
+                    >
+                        CLIPPING
+                    </span>
+
+                </div>
 
 
-<!-- =================================================
-     AUDIO LEVEL METER
-================================================== -->
+                <!-- LEFT CHANNEL -->
 
-<div class="audio-meter">
+                <div class="meter-channel">
 
-    <div class="meter-header">
-        <span class="meter-title">Audio Level</span>
-        <span
-            class="clipping-indicator"
-            id="clippingIndicator"
-        >
-            CLIPPING
-        </span>
-    </div>
+                    <div class="meter-label">
 
-    <!-- LEFT CHANNEL -->
+                        <span>L</span>
 
-    <div class="meter-channel">
+                        <span
+                            class="meter-db"
+                            id="leftDb"
+                        >
+                            -60 dB
+                        </span>
 
-        <div class="meter-label">
-            <span>L</span>
-            <span
-                class="meter-db"
-                id="leftDb"
-            >
-                -60 dB
-            </span>
-        </div>
+                    </div>
 
-        <div class="meter-track">
+                    <div class="meter-track">
 
-            <div
-                class="meter-level"
-                id="leftLevel"
-            ></div>
+                        <div
+                            class="meter-level"
+                            id="leftLevel"
+                        ></div>
 
-            <div
-                class="meter-peak"
-                id="leftPeak"
-            ></div>
+                        <div
+                            class="meter-peak"
+                            id="leftPeak"
+                        ></div>
 
-        </div>
+                    </div>
 
-    </div>
+                </div>
 
 
-    <!-- RIGHT CHANNEL -->
+                <!-- RIGHT CHANNEL -->
 
-    <div class="meter-channel">
+                <div class="meter-channel">
 
-        <div class="meter-label">
-            <span>R</span>
-            <span
-                class="meter-db"
-                id="rightDb"
-            >
-                -60 dB
-            </span>
-        </div>
+                    <div class="meter-label">
 
-        <div class="meter-track">
+                        <span>R</span>
 
-            <div
-                class="meter-level"
-                id="rightLevel"
-            ></div>
+                        <span
+                            class="meter-db"
+                            id="rightDb"
+                        >
+                            -60 dB
+                        </span>
 
-            <div
-                class="meter-peak"
-                id="rightPeak"
-            ></div>
+                    </div>
 
-        </div>
+                    <div class="meter-track">
 
-    </div>
+                        <div
+                            class="meter-level"
+                            id="rightLevel"
+                        ></div>
 
-    <div class="meter-scale">
-        <span>-60</span>
-        <span>-48</span>
-        <span>-36</span>
-        <span>-24</span>
-        <span>-12</span>
-        <span>0 dBFS</span>
-    </div>
+                        <div
+                            class="meter-peak"
+                            id="rightPeak"
+                        ></div>
 
-</div>
+                    </div>
+
+                </div>
+
+
+                <div class="meter-scale">
+
+                    <span>-60</span>
+                    <span>-48</span>
+                    <span>-36</span>
+                    <span>-24</span>
+                    <span>-12</span>
+                    <span>0 dBFS</span>
+
+                </div>
+
+            </div>
+
 
             <!-- =================================================
                  MAIN CONTROLS
@@ -211,6 +313,7 @@
                     id="previousBtn"
                     title="Previous song"
                     aria-label="Previous song"
+                    type="button"
                 >
 
                     <svg
@@ -243,6 +346,7 @@
                     id="backBtn"
                     title="10 seconds backward"
                     aria-label="10 seconds backward"
+                    type="button"
                 >
 
                     <svg
@@ -251,7 +355,6 @@
                     >
 
                         <path d="M9 14l-4-4 4-4"/>
-
                         <path d="M5 10h7a6 6 0 1 1-4.24 10.24"/>
 
                         <text
@@ -276,6 +379,7 @@
                     id="playBtn"
                     title="Play"
                     aria-label="Play"
+                    type="button"
                 >
 
                     <svg
@@ -302,6 +406,7 @@
                     id="forwardBtn"
                     title="10 seconds forward"
                     aria-label="10 seconds forward"
+                    type="button"
                 >
 
                     <svg
@@ -310,7 +415,6 @@
                     >
 
                         <path d="M15 14l4-4-4-4"/>
-
                         <path d="M19 10h-7a6 6 0 1 0 4.24 10.24"/>
 
                         <text
@@ -335,6 +439,7 @@
                     id="nextBtn"
                     title="Next song"
                     aria-label="Next song"
+                    type="button"
                 >
 
                     <svg
@@ -374,6 +479,7 @@
                     class="small-btn"
                     id="repeatBtn"
                     title="Repeat current song"
+                    type="button"
                 >
 
                     <svg
@@ -408,6 +514,7 @@
                     class="small-btn"
                     id="shuffleBtn"
                     title="Shuffle"
+                    type="button"
                 >
 
                     <svg
@@ -496,6 +603,7 @@
                         class="icon-btn"
                         title="Mute"
                         aria-label="Mute"
+                        type="button"
                     >
 
                         <svg
@@ -510,13 +618,8 @@
                                 stroke="none"
                             />
 
-                            <path
-                                d="M15 9a4 4 0 0 1 0 6"
-                            />
-
-                            <path
-                                d="M18 6a8 8 0 0 1 0 12"
-                            />
+                            <path d="M15 9a4 4 0 0 1 0 6"/>
+                            <path d="M18 6a8 8 0 0 1 0 12"/>
 
                         </svg>
 
@@ -583,7 +686,9 @@
         </section>
 
 
-        <!-- FOOTER -->
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
 
         <div class="footer">
             Janmashtami 2026 • Cultural Evening
@@ -593,7 +698,7 @@
 
 
     <!-- =================================================
-         AUDIO
+         AUDIO ELEMENT
     ================================================== -->
 
     <audio id="audio"></audio>
