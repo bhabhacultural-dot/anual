@@ -51,7 +51,7 @@ const songs = [
     "20_dwarka-vileen.mp3",
     "21_krishna-bhakt.mp3",
     "22_buddh-kalki.mp3",
-    "23_krishna-manch-hagman.mp3",
+    "23_krishna-manch-agman.mp3",
     "24_madhurashtak.mp3"
 ];
 
@@ -192,7 +192,7 @@ const videos = {
     },
 
     "23_krishna-manch-hagman.mp3": {
-        local: "videos/23_krishna-manch-hagman.mp4",
+        local: "videos/23_krishna-manch-agman.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974138/23_krishna-mach-agman_dgwxml.mp4"
     },
 
