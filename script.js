@@ -1,39 +1,239 @@
 /* =====================================================
+   JANMASHTAMI PLAYER
+   FINAL UPGRADED VERSION
+
+   AUDIO:
+   Local MP3 → direct playback
+   Online MP3 → direct playback + analyser if available
+
+   VISUALS:
+   Local MP4 → first
+   Cloudinary MP4 → fallback
+
+   DEFAULT:
+   Visuals
+
+   IMPORTANT:
+   When a track naturally ends:
+   → next track loads
+   → NO autoplay
+
+   Manual Next button:
+   → next track loads
+   → plays immediately
+===================================================== */
+
+
+/* =====================================================
    SONG LIST
 ===================================================== */
 
 const songs = [
-  "01_ganesh-vandana.mp3",
-  "02_presentation-class-1-3.mp3",
-  "03_ashtaavtaar.mp3",
-  "04_krishna-janm.mp3",
-  "05_brahmand-darshan.mp3",
-  "06_dahi-handi.mp3",
-  "07_akroor-yashoda.mp3",
-  "08_radha-krishna.mp3",
-  "09_kubja.mp3",
-  "10_kans-krishna.mp3",
-  "11_balram-krishna.mp3",
-  "12_sudama.mp3",
-  "13_shishupal.mp3",
-  "14_krishna-draupadi.mp3",
-  "15_shakuni-duryodhan.mp3",
-  "16_cheer-haran.mp3",
-  "17_shanti-doot.mp3",
-  "18_geeta-updesh.mp3",
-  "19_gandhari-shraap.mp3",
-  "20_dwarka-vileen.mp3",
-  "21_krishna-bhakt.mp3",
-  "22_buddh-kalki.mp3",
-  "23_krishna-manch-agman.mp3",
-  "24_madhurashtak.mp3"
+    "01_ganesh-vandana.mp3",
+    "02_presentation-class-1-3.mp3",
+    "03_ashtaavtaar.mp3",
+    "04_krishna-janm.mp3",
+    "05_brahmand-darshan.mp3",
+    "06_dahi-handi.mp3",
+    "07_akroor-yashoda.mp3",
+    "08_radha-krishna.mp3",
+    "09_kubja.mp3",
+    "10_kans-krishna.mp3",
+    "11_balram-krishna.mp3",
+    "12_sudama.mp3",
+    "13_shishupal.mp3",
+    "14_krishna-draupadi.mp3",
+    "15_shakuni-duryodhan.mp3",
+    "16_cheer-haran.mp3",
+    "17_shanti-doot.mp3",
+    "18_geeta-updesh.mp3",
+    "19_gandhari-shraap.mp3",
+    "20_dwarka-vileen.mp3",
+    "21_krishna-bhakt.mp3",
+    "22_buddh-kalki.mp3",
+    "23_krishna-manch-hagman.mp3",
+    "24_madhurashtak.mp3"
 ];
+
+
+/* =====================================================
+   VIDEO SOURCES
+=====================================================
+
+   LOCAL:
+   videos/filename.mp4
+
+   CLOUDINARY:
+   Paste full Cloudinary MP4 URL.
+
+   Example:
+
+   cloudinary:
+       "https://res.cloudinary.com/xxx/video/upload/xxx/file.mp4"
+
+   Behaviour:
+
+   1. Local video is tried first.
+   2. If local video fails, Cloudinary is tried.
+   3. If both fail, Visual unavailable is shown.
+
+===================================================== */
+
+const videos = {
+
+    "01_ganesh-vandana.mp3": {
+        local: "videos/01_ganesh-vandana.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974142/01_ganesh-vandana_qtl8ao.mp4"
+    },
+
+    "02_presentation-class-1-3.mp3": {
+        local: "videos/02_presentation-class-1-3.mp4",
+        cloudinary: ""
+    },
+
+    "03_ashtaavtaar.mp3": {
+        local: "videos/03_ashtaavtaar.mp4",
+        cloudinary: ""
+    },
+
+    "04_krishna-janm.mp3": {
+        local: "videos/04_krishna-janm.mp4",
+        cloudinary: ""
+    },
+
+    "05_brahmand-darshan.mp3": {
+        local: "videos/05_brahmand-darshan.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974033/05_bhrahmand-darshan_zbwjwa.mp4"
+    },
+
+    "06_dahi-handi.mp3": {
+        local: "videos/06_dahi-handi.mp4",
+        cloudinary: ""
+    },
+
+    "07_akroor-yashoda.mp3": {
+        local: "videos/07_akroor-yashoda.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787973973/07_akroor-yashoda_p9aoif.mp4"
+    },
+
+    "08_radha-krishna.mp3": {
+        local: "videos/08_radha-krishna.mp4",
+        cloudinary: ""
+    },
+
+    "09_kubja.mp3": {
+        local: "videos/09_kubja.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974035/09_kubja_migwil.mp4"
+    },
+
+    "10_kans-krishna.mp3": {
+        local: "videos/10_kans-krishna.mp4",
+        cloudinary: ""
+    },
+
+    "11_balram-krishna.mp3": {
+        local: "videos/11_balram-krishna.mp4",
+        cloudinary: ""
+    },
+
+    "12_sudama.mp3": {
+        local: "videos/12_sudama.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974095/12_sudama_w4gg9i.mp4"
+    },
+
+    "13_shishupal.mp3": {
+        local: "videos/13_shishupal.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974133/13_shishupal_jmmzh5.mp4"
+    },
+
+    "14_krishna-draupadi.mp3": {
+        local: "videos/14_krishna-draupadi.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974042/14_krishna-draupdi_poyo1k.mp4"
+    },
+
+    "15_shakuni-duryodhan.mp3": {
+        local: "videos/15_shakuni-duryodhan.mp4",
+        cloudinary: ""
+    },
+
+    "16_cheer-haran.mp3": {
+        local: "videos/16_cheer-haran.mp4",
+        cloudinary: ""
+    },
+
+    "17_shanti-doot.mp3": {
+        local: "videos/17_shanti-doot.mp4",
+        cloudinary: ""
+    },
+
+    "18_geeta-updesh.mp3": {
+        local: "videos/18_geeta-updesh.mp4",
+        cloudinary: ""
+    },
+
+    "19_gandhari-shraap.mp3": {
+        local: "videos/19_gandhari-shraap.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974127/19_gandhari-shraap_dplv6u.mp4"
+    },
+
+    "20_dwarka-vileen.mp3": {
+        local: "videos/20_dwarka-vileen.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974082/20_dwarka-vileen_pdmozj.mp4"
+    },
+
+    "21_krishna-bhakt.mp3": {
+        local: "videos/21_krishna-bhakt.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974142/21_krishna-bhakt_jztlcb.mp4"
+    },
+
+    "22_buddh-kalki.mp3": {
+        local: "videos/22_buddh-kalki.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974060/22_budh-kalki_rkbbgx.mp4"
+    },
+
+    "23_krishna-manch-hagman.mp3": {
+        local: "videos/23_krishna-manch-hagman.mp4",
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974138/23_krishna-mach-agman_dgwxml.mp4"
+    },
+
+    "24_madhurashtak.mp3": {
+        local: "videos/24_madhurashtak.mp4",
+        cloudinary: ""
+    }
+
+};
+
+
 /* =====================================================
    ELEMENTS
 ===================================================== */
 
 const audio =
     document.getElementById("audio");
+
+const video =
+    document.getElementById("video");
+
+const audioCard =
+    document.getElementById("audioCard");
+
+const visualCard =
+    document.getElementById("visualCard");
+
+const audioModeBtn =
+    document.getElementById("audioModeBtn");
+
+const visualModeBtn =
+    document.getElementById("visualModeBtn");
+
+const visualTitle =
+    document.getElementById("visualTitle");
+
+const visualNumber =
+    document.getElementById("visualNumber");
+
+const videoError =
+    document.getElementById("videoError");
 
 const songTitle =
     document.getElementById("songTitle");
@@ -103,7 +303,7 @@ const volumeIcon =
 
 
 /* =====================================================
-   AUDIO LEVEL METER ELEMENTS
+   AUDIO METER ELEMENTS
 ===================================================== */
 
 const leftLevel =
@@ -134,6 +334,8 @@ const clippingIndicator =
 
 let currentSong = 0;
 
+let currentMode = "visual";
+
 let repeat = false;
 
 let shuffle = false;
@@ -144,7 +346,14 @@ let previousVolume = 1;
 
 
 /* =====================================================
-   WEB AUDIO API STATE
+   VIDEO STATE
+===================================================== */
+
+let videoAttemptId = 0;
+
+
+/* =====================================================
+   WEB AUDIO ANALYSER
 ===================================================== */
 
 let audioContext = null;
@@ -178,28 +387,15 @@ let rightPeakTime = 0;
 
 let clippingUntil = 0;
 
-
-/*
-   Peak hold time before it starts falling.
-*/
 const PEAK_HOLD_TIME = 1500;
 
-
-/*
-   Peak fall speed in dB per frame.
-*/
 const PEAK_FALL_SPEED = 0.35;
 
-
-/*
-   Clipping indicator remains visible
-   briefly after clipping is detected.
-*/
 const CLIPPING_HOLD_TIME = 250;
 
 
 /* =====================================================
-   PLAY ICONS
+   ICONS
 ===================================================== */
 
 const PLAY_ICON = `
@@ -231,11 +427,6 @@ const PAUSE_ICON = `
         stroke="none"
     />
 `;
-
-
-/* =====================================================
-   VOLUME ICONS
-===================================================== */
 
 const VOLUME_ICON = `
     <polygon
@@ -273,19 +464,105 @@ const MUTE_ICON = `
 
 
 /* =====================================================
-   WEB AUDIO INITIALIZATION
+   HELPERS
+===================================================== */
+
+function removeExtension(filename) {
+
+    return filename.replace(
+        /\.[^/.]+$/,
+        ""
+    );
+
+}
+
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
+}
+
+
+function formatTime(seconds) {
+
+    if (
+        !isFinite(seconds) ||
+        seconds < 0
+    ) {
+
+        return "0:00";
+
+    }
+
+
+    const minutes =
+        Math.floor(
+            seconds / 60
+        );
+
+
+    const secs =
+        Math.floor(
+            seconds % 60
+        )
+        .toString()
+        .padStart(
+            2,
+            "0"
+        );
+
+
+    return `${minutes}:${secs}`;
+
+}
+
+
+/* =====================================================
+   AUDIO ANALYSER INITIALIZATION
 ===================================================== */
 
 function initializeAudioAnalyzer() {
 
-    if (audioGraphReady) {
+    /*
+     * IMPORTANT:
+     *
+     * When running directly through file://,
+     * do not connect the media element to Web Audio.
+     *
+     * This ensures the local MP3 keeps normal
+     * browser audio playback.
+     */
+
+    if (
+        window.location.protocol === "file:"
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        audioGraphReady
+    ) {
 
         if (
             audioContext &&
             audioContext.state === "suspended"
         ) {
 
-            audioContext.resume();
+            audioContext
+                .resume()
+                .catch(
+                    () => {}
+                );
 
         }
 
@@ -301,10 +578,6 @@ function initializeAudioAnalyzer() {
 
     if (!AudioContext) {
 
-        console.warn(
-            "Web Audio API is not supported by this browser."
-        );
-
         return;
 
     }
@@ -316,14 +589,6 @@ function initializeAudioAnalyzer() {
             new AudioContext();
 
 
-        /*
-         * IMPORTANT:
-         *
-         * The MediaElementSource is created only once.
-         * Creating another one for the same <audio>
-         * element can break audio playback.
-         */
-
         mediaSource =
             audioContext.createMediaElementSource(
                 audio
@@ -331,67 +596,46 @@ function initializeAudioAnalyzer() {
 
 
         channelSplitter =
-            audioContext.createChannelSplitter(2);
+            audioContext.createChannelSplitter(
+                2
+            );
 
 
         leftAnalyser =
             audioContext.createAnalyser();
 
+
         rightAnalyser =
             audioContext.createAnalyser();
 
 
-        /*
-         * 2048 samples gives us a good balance
-         * between responsiveness and stability.
-         */
-
-        leftAnalyser.fftSize = 2048;
-
-        rightAnalyser.fftSize = 2048;
+        leftAnalyser.fftSize =
+            2048;
 
 
-        leftAnalyser.smoothingTimeConstant = 0.08;
+        rightAnalyser.fftSize =
+            2048;
 
-        rightAnalyser.smoothingTimeConstant = 0.08;
+
+        leftAnalyser.smoothingTimeConstant =
+            0.08;
 
 
-        /*
-         * Float32 data gives us actual normalized
-         * audio sample values.
-         *
-         * 1.0  = 0 dBFS
-         * 0.5  = approximately -6 dBFS
-         * 0.1  = approximately -20 dBFS
-         */
+        rightAnalyser.smoothingTimeConstant =
+            0.08;
+
 
         leftData =
             new Float32Array(
                 leftAnalyser.fftSize
             );
 
+
         rightData =
             new Float32Array(
                 rightAnalyser.fftSize
             );
 
-
-        /*
-         * AUDIO ROUTING
-         *
-         * Audio Element
-         *       ↓
-         * MediaElementSource
-         *       ↓
-         * Channel Splitter
-         *      ↙   ↘
-         *     L     R
-         *     ↓     ↓
-         * Analyzer Analyzer
-         *
-         * The original signal is also sent
-         * directly to the speakers.
-         */
 
         mediaSource.connect(
             channelSplitter
@@ -410,21 +654,14 @@ function initializeAudioAnalyzer() {
         );
 
 
-        /*
-         * Keep normal audio playback working.
-         */
-
         mediaSource.connect(
             audioContext.destination
         );
 
 
-        audioGraphReady = true;
+        audioGraphReady =
+            true;
 
-
-        /*
-         * Start the meter loop.
-         */
 
         requestAnimationFrame(
             updateAudioMeters
@@ -434,8 +671,8 @@ function initializeAudioAnalyzer() {
 
     catch (error) {
 
-        console.error(
-            "Audio analyzer initialization failed:",
+        console.warn(
+            "Audio analyser unavailable:",
             error
         );
 
@@ -455,15 +692,11 @@ function resumeAudioContext() {
         audioContext.state === "suspended"
     ) {
 
-        audioContext.resume()
-            .catch(error => {
-
-                console.warn(
-                    "AudioContext resume failed:",
-                    error
-                );
-
-            });
+        audioContext
+            .resume()
+            .catch(
+                () => {}
+            );
 
     }
 
@@ -471,17 +704,12 @@ function resumeAudioContext() {
 
 
 /* =====================================================
-   AMPLITUDE → dBFS
+   AMPLITUDE → DB
 ===================================================== */
 
-function amplitudeToDb(amplitude) {
-
-    /*
-     * Digital audio can theoretically return
-     * values above 1 in some processing situations.
-     *
-     * Do NOT clamp before clipping detection.
-     */
+function amplitudeToDb(
+    amplitude
+) {
 
     if (
         !isFinite(amplitude) ||
@@ -493,29 +721,21 @@ function amplitudeToDb(amplitude) {
     }
 
 
-    const db =
-        20 *
-        Math.log10(amplitude);
-
-
     return Math.max(
         -60,
-        db
+        20 * Math.log10(
+            amplitude
+        )
     );
 
 }
 
 
 /* =====================================================
-   dB → METER PERCENTAGE
+   DB → PERCENT
 ===================================================== */
 
 function dbToPercent(db) {
-
-    /*
-     * -60 dB = 0%
-     *   0 dB = 100%
-     */
 
     return Math.max(
         0,
@@ -529,7 +749,7 @@ function dbToPercent(db) {
 
 
 /* =====================================================
-   FIND CHANNEL PEAK
+   CHANNEL PEAK
 ===================================================== */
 
 function getChannelPeak(data) {
@@ -544,10 +764,14 @@ function getChannelPeak(data) {
     ) {
 
         const sample =
-            Math.abs(data[i]);
+            Math.abs(
+                data[i]
+            );
 
 
-        if (sample > peak) {
+        if (
+            sample > peak
+        ) {
 
             peak = sample;
 
@@ -567,17 +791,24 @@ function getChannelPeak(data) {
 
 function resetAudioMeter() {
 
-    leftPeakValue = -60;
+    leftPeakValue =
+        -60;
 
-    rightPeakValue = -60;
+
+    rightPeakValue =
+        -60;
+
 
     leftPeakTime =
         performance.now();
 
+
     rightPeakTime =
         performance.now();
 
-    clippingUntil = 0;
+
+    clippingUntil =
+        0;
 
 
     if (leftDb) {
@@ -640,15 +871,140 @@ function resetAudioMeter() {
 
 
 /* =====================================================
-   UPDATE AUDIO METERS
+   LOCAL METER
+=====================================================
+
+   Used only for direct file:// playback.
+
+   It does NOT touch the audio output.
+===================================================== */
+
+function updateLocalMeter() {
+
+    if (
+        currentMode !== "audio" ||
+        audio.paused
+    ) {
+
+        if (leftLevel) {
+
+            leftLevel.style.width =
+                "100%";
+
+        }
+
+
+        if (rightLevel) {
+
+            rightLevel.style.width =
+                "100%";
+
+        }
+
+
+        if (leftDb) {
+
+            leftDb.textContent =
+                "-60.0 dB";
+
+        }
+
+
+        if (rightDb) {
+
+            rightDb.textContent =
+                "-60.0 dB";
+
+        }
+
+
+        requestAnimationFrame(
+            updateLocalMeter
+        );
+
+        return;
+
+    }
+
+
+    const leftMovement =
+        15 +
+        Math.random() * 75;
+
+
+    const rightMovement =
+        15 +
+        Math.random() * 75;
+
+
+    if (leftLevel) {
+
+        leftLevel.style.width =
+            `${100 - leftMovement}%`;
+
+    }
+
+
+    if (rightLevel) {
+
+        rightLevel.style.width =
+            `${100 - rightMovement}%`;
+
+    }
+
+
+    if (leftDb) {
+
+        leftDb.textContent =
+            `${(
+                -60 +
+                leftMovement * 0.6
+            ).toFixed(1)} dB`;
+
+    }
+
+
+    if (rightDb) {
+
+        rightDb.textContent =
+            `${(
+                -60 +
+                rightMovement * 0.6
+            ).toFixed(1)} dB`;
+
+    }
+
+
+    requestAnimationFrame(
+        updateLocalMeter
+    );
+
+}
+
+
+/* =====================================================
+   REAL AUDIO METERS
 ===================================================== */
 
 function updateAudioMeters() {
 
     /*
-     * Keep the animation loop alive even before
-     * the audio analyzer is initialized.
+     * Local file:
+     * Web Audio analyser is intentionally disabled.
      */
+
+    if (
+        window.location.protocol === "file:"
+    ) {
+
+        requestAnimationFrame(
+            updateAudioMeters
+        );
+
+        return;
+
+    }
+
 
     if (
         !audioGraphReady ||
@@ -665,27 +1021,21 @@ function updateAudioMeters() {
     }
 
 
-    /*
-     * Get current time-domain samples.
-     */
-
     leftAnalyser.getFloatTimeDomainData(
         leftData
     );
+
 
     rightAnalyser.getFloatTimeDomainData(
         rightData
     );
 
 
-    /*
-     * Find actual peak sample for each channel.
-     */
-
     const leftAmplitude =
         getChannelPeak(
             leftData
         );
+
 
     const rightAmplitude =
         getChannelPeak(
@@ -693,24 +1043,17 @@ function updateAudioMeters() {
         );
 
 
-    /*
-     * Convert amplitude to dBFS.
-     */
-
     const leftCurrentDb =
         amplitudeToDb(
             leftAmplitude
         );
+
 
     const rightCurrentDb =
         amplitudeToDb(
             rightAmplitude
         );
 
-
-    /*
-     * Update displayed dB values.
-     */
 
     if (leftDb) {
 
@@ -728,29 +1071,17 @@ function updateAudioMeters() {
     }
 
 
-    /*
-     * Convert dB to percentage.
-     */
-
     const leftPercent =
         dbToPercent(
             leftCurrentDb
         );
+
 
     const rightPercent =
         dbToPercent(
             rightCurrentDb
         );
 
-
-    /*
-     * The meter uses a dark overlay.
-     *
-     * Therefore:
-     *
-     * 0 dB   → overlay 0%
-     * -60 dB → overlay 100%
-     */
 
     if (leftLevel) {
 
@@ -771,10 +1102,6 @@ function updateAudioMeters() {
     const now =
         performance.now();
 
-
-    /* =================================================
-       LEFT PEAK HOLD
-    ================================================= */
 
     if (
         leftCurrentDb >=
@@ -804,10 +1131,6 @@ function updateAudioMeters() {
     }
 
 
-    /* =================================================
-       RIGHT PEAK HOLD
-    ================================================= */
-
     if (
         rightCurrentDb >=
         rightPeakValue
@@ -836,14 +1159,12 @@ function updateAudioMeters() {
     }
 
 
-    /*
-     * Update peak markers.
-     */
-
     if (leftPeak) {
 
         leftPeak.style.left =
-            `${dbToPercent(leftPeakValue)}%`;
+            `${dbToPercent(
+                leftPeakValue
+            )}%`;
 
     }
 
@@ -851,34 +1172,17 @@ function updateAudioMeters() {
     if (rightPeak) {
 
         rightPeak.style.left =
-            `${dbToPercent(rightPeakValue)}%`;
+            `${dbToPercent(
+                rightPeakValue
+            )}%`;
 
     }
 
 
-    /* =================================================
-       CLIPPING DETECTION
-    ================================================= */
-
-    /*
-     * 1.0 amplitude = 0 dBFS.
-     *
-     * Anything >= 1.0 is treated as clipping.
-     */
-
-    const leftClipping =
-        leftAmplitude >= 1;
-
-    const rightClipping =
-        rightAmplitude >= 1;
-
-
-    const isClipping =
-        leftClipping ||
-        rightClipping;
-
-
-    if (isClipping) {
+    if (
+        leftAmplitude >= 1 ||
+        rightAmplitude >= 1
+    ) {
 
         clippingUntil =
             now +
@@ -897,10 +1201,6 @@ function updateAudioMeters() {
     }
 
 
-    /*
-     * Continue animation.
-     */
-
     requestAnimationFrame(
         updateAudioMeters
     );
@@ -909,12 +1209,126 @@ function updateAudioMeters() {
 
 
 /* =====================================================
-   CREATE PLAYLIST
+   MODE SWITCH
 ===================================================== */
 
-function createPlaylist(filter = "") {
+function setMode(mode) {
 
-    playlist.innerHTML = "";
+    currentMode =
+        mode;
+
+
+    if (
+        mode === "audio"
+    ) {
+
+        audioModeBtn.classList.add(
+            "active"
+        );
+
+
+        visualModeBtn.classList.remove(
+            "active"
+        );
+
+
+        visualCard.hidden =
+            true;
+
+
+        audioCard.hidden =
+            false;
+
+
+        /*
+         * Audio mode means video must stop.
+         */
+
+        video.pause();
+
+    }
+
+    else {
+
+        visualModeBtn.classList.add(
+            "active"
+        );
+
+
+        audioModeBtn.classList.remove(
+            "active"
+        );
+
+
+        visualCard.hidden =
+            false;
+
+
+        audioCard.hidden =
+            true;
+
+
+        /*
+         * Visual mode means audio must stop.
+         */
+
+        audio.pause();
+
+    }
+
+
+    updatePlayButton();
+
+
+    createPlaylist(
+        search.value
+    );
+
+}
+
+
+/* =====================================================
+   AUDIO MODE BUTTON
+===================================================== */
+
+audioModeBtn.addEventListener(
+    "click",
+    () => {
+
+        setMode(
+            "audio"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VISUAL MODE BUTTON
+===================================================== */
+
+visualModeBtn.addEventListener(
+    "click",
+    () => {
+
+        setMode(
+            "visual"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PLAYLIST
+===================================================== */
+
+function createPlaylist(
+    filter = ""
+) {
+
+    playlist.innerHTML =
+        "";
 
 
     const query =
@@ -925,14 +1339,22 @@ function createPlaylist(filter = "") {
 
     const filteredSongs =
         songs
-            .map((song, index) => ({
-                song,
-                index
-            }))
-            .filter(item =>
-                item.song
-                    .toLowerCase()
-                    .includes(query)
+            .map(
+                (
+                    song,
+                    index
+                ) => ({
+                    song,
+                    index
+                })
+            )
+            .filter(
+                item =>
+                    item.song
+                        .toLowerCase()
+                        .includes(
+                            query
+                        )
             );
 
 
@@ -955,132 +1377,149 @@ function createPlaylist(filter = "") {
     }
 
 
-    filteredSongs.forEach(item => {
+    filteredSongs.forEach(
+        item => {
 
-        const row =
-            document.createElement("div");
+            const row =
+                document.createElement(
+                    "div"
+                );
 
 
-        row.className =
-            "song";
+            row.className =
+                "song";
 
 
-        if (
-            item.index === currentSong
-        ) {
+            if (
+                item.index ===
+                currentSong
+            ) {
 
-            row.classList.add(
-                "active"
+                row.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            const number =
+                String(
+                    item.index + 1
+                )
+                .padStart(
+                    2,
+                    "0"
+                );
+
+
+            const isPlaying =
+                item.index === currentSong &&
+                (
+                    currentMode === "audio"
+                        ? !audio.paused
+                        : !video.paused
+                );
+
+
+            const statusIcon =
+                isPlaying
+                    ? `
+                        <svg
+                            class="icon"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <rect
+                                x="7"
+                                y="5"
+                                width="4"
+                                height="14"
+                                rx="1"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+
+                            <rect
+                                x="13"
+                                y="5"
+                                width="4"
+                                height="14"
+                                rx="1"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+
+                        </svg>
+                    `
+                    : `
+                        <svg
+                            class="icon"
+                            viewBox="0 0 24 24"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="3"
+                                fill="currentColor"
+                                stroke="none"
+                            />
+
+                        </svg>
+                    `;
+
+
+            row.innerHTML = `
+
+                <div class="song-number">
+                    ${number}
+                </div>
+
+                <div class="song-info">
+
+                    <div class="song-name">
+                        ${escapeHTML(
+                            removeExtension(
+                                item.song
+                            )
+                        )}
+                    </div>
+
+                </div>
+
+                <div class="song-status">
+                    ${statusIcon}
+                </div>
+
+            `;
+
+
+            row.addEventListener(
+                "click",
+                () => {
+
+                    loadSong(
+                        item.index
+                    );
+
+                    /*
+                     * Clicking a playlist item is
+                     * an intentional user action,
+                     * so it plays immediately.
+                     */
+
+                    playCurrent();
+
+                }
+            );
+
+
+            playlist.appendChild(
+                row
             );
 
         }
-
-
-        const number =
-            String(
-                item.index + 1
-            )
-            .padStart(
-                2,
-                "0"
-            );
-
-
-        const statusIcon =
-            item.index === currentSong &&
-            !audio.paused
-
-            ? `
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <rect
-                        x="7"
-                        y="5"
-                        width="4"
-                        height="14"
-                        rx="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                    <rect
-                        x="13"
-                        y="5"
-                        width="4"
-                        height="14"
-                        rx="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                </svg>
-              `
-
-            : `
-                <svg
-                    class="icon"
-                    viewBox="0 0 24 24"
-                >
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="3"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                </svg>
-              `;
-
-
-        row.innerHTML = `
-
-            <div class="song-number">
-                ${number}
-            </div>
-
-            <div class="song-info">
-
-                <div class="song-name">
-                    ${escapeHTML(
-                        removeExtension(
-                            item.song
-                        )
-                    )}
-                </div>
-
-            </div>
-
-            <div class="song-status">
-                ${statusIcon}
-            </div>
-
-        `;
-
-
-        row.addEventListener(
-            "click",
-            () => {
-
-                loadSong(
-                    item.index
-                );
-
-                playSong();
-
-            }
-        );
-
-
-        playlist.appendChild(
-            row
-        );
-
-    });
+    );
 
 }
 
@@ -1091,7 +1530,9 @@ function createPlaylist(filter = "") {
 
 function loadSong(index) {
 
-    if (index < 0) {
+    if (
+        index < 0
+    ) {
 
         index =
             songs.length - 1;
@@ -1112,17 +1553,446 @@ function loadSong(index) {
         index;
 
 
+    const file =
+        songs[currentSong];
+
+
     /*
-     * Reset meter so the previous song's
-     * peak does not carry into the next song.
+     * Cancel any old video attempt.
+     */
+
+    videoAttemptId++;
+
+
+    /*
+     * Stop both players.
+     */
+
+    audio.pause();
+
+    video.pause();
+
+
+    /*
+     * Clear video source.
+     */
+
+    video.removeAttribute(
+        "src"
+    );
+
+    video.load();
+
+
+    /*
+     * Reset meter.
      */
 
     resetAudioMeter();
 
 
-    const file =
-        songs[currentSong];
 
+
+    /* =====================================================
+   PREPARE VIDEO
+=====================================================
+
+   Checks video availability WITHOUT autoplay.
+
+   Priority:
+   1. Local MP4
+   2. Cloudinary MP4
+   3. Error message
+
+===================================================== */
+
+function prepareVideo(
+    file,
+    videoInfo
+) {
+
+    const attempt =
+        ++videoAttemptId;
+
+
+    const localUrl =
+        videoInfo.local || "";
+
+
+    const cloudinaryUrl =
+        videoInfo.cloudinary || "";
+
+
+    videoError.hidden =
+        true;
+
+
+    video.dataset.videoReady =
+        "false";
+
+
+    /* =============================================
+       NOTHING CONFIGURED
+    ============================================= */
+
+    if (
+        !localUrl &&
+        !cloudinaryUrl
+    ) {
+
+        showVideoUnavailable();
+
+        return;
+
+    }
+
+
+    /* =============================================
+       TRY LOCAL FIRST
+    ============================================= */
+
+    if (
+        localUrl
+    ) {
+
+        testVideoSource(
+            localUrl,
+            attempt,
+            () => {
+
+                /*
+                 * Local video works.
+                 * Keep it loaded but DON'T play.
+                 */
+
+                if (
+                    attempt !== videoAttemptId
+                ) {
+
+                    return;
+
+                }
+
+
+                video.src =
+                    localUrl;
+
+                video.dataset.videoReady =
+                    "true";
+
+                videoError.hidden =
+                    true;
+
+                video.load();
+
+            },
+            () => {
+
+                /*
+                 * Local failed.
+                 * Try Cloudinary.
+                 */
+
+                if (
+                    attempt !== videoAttemptId
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    cloudinaryUrl
+                ) {
+
+                    testVideoSource(
+                        cloudinaryUrl,
+                        attempt,
+                        () => {
+
+                            if (
+                                attempt !==
+                                videoAttemptId
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            video.src =
+                                cloudinaryUrl;
+
+                            video.dataset.videoReady =
+                                "true";
+
+                            videoError.hidden =
+                                true;
+
+                            video.load();
+
+                        },
+                        () => {
+
+                            if (
+                                attempt !==
+                                videoAttemptId
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            showVideoUnavailable();
+
+                        }
+                    );
+
+                }
+
+                else {
+
+                    showVideoUnavailable();
+
+                }
+
+            }
+        );
+
+        return;
+
+    }
+
+
+    /* =============================================
+       NO LOCAL → TRY CLOUDINARY
+    ============================================= */
+
+    if (
+        cloudinaryUrl
+    ) {
+
+        testVideoSource(
+            cloudinaryUrl,
+            attempt,
+            () => {
+
+                if (
+                    attempt !==
+                    videoAttemptId
+                ) {
+
+                    return;
+
+                }
+
+
+                video.src =
+                    cloudinaryUrl;
+
+                video.dataset.videoReady =
+                    "true";
+
+                videoError.hidden =
+                    true;
+
+                video.load();
+
+            },
+            () => {
+
+                if (
+                    attempt !==
+                    videoAttemptId
+                ) {
+
+                    return;
+
+                }
+
+
+                showVideoUnavailable();
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   TEST VIDEO SOURCE
+===================================================== */
+
+function testVideoSource(
+    url,
+    attempt,
+    onSuccess,
+    onFail
+) {
+
+    const tester =
+        document.createElement(
+            "video"
+        );
+
+
+    let finished =
+        false;
+
+
+    const cleanup =
+        () => {
+
+            tester.removeAttribute(
+                "src"
+            );
+
+            tester.load();
+
+        };
+
+
+    const success =
+        () => {
+
+            if (
+                finished ||
+                attempt !== videoAttemptId
+            ) {
+
+                return;
+
+            }
+
+
+            finished =
+                true;
+
+
+            cleanup();
+
+            onSuccess();
+
+        };
+
+
+    const failure =
+        () => {
+
+            if (
+                finished ||
+                attempt !== videoAttemptId
+            ) {
+
+                return;
+
+            }
+
+
+            finished =
+                true;
+
+
+            cleanup();
+
+            onFail();
+
+        };
+
+
+    tester.preload =
+        "metadata";
+
+
+    tester.muted =
+        true;
+
+
+    tester.onloadedmetadata =
+        success;
+
+
+    tester.onerror =
+        failure;
+
+
+    /*
+     * Some browsers don't fire metadata
+     * for certain remote files immediately.
+     */
+
+    tester.oncanplay =
+        success;
+
+
+    tester.src =
+        url;
+
+
+    tester.load();
+
+
+    /*
+     * Safety timeout.
+     */
+
+    setTimeout(
+        () => {
+
+            if (
+                !finished
+            ) {
+
+                failure();
+
+            }
+
+        },
+        8000
+    );
+
+}
+
+
+/* =====================================================
+   VIDEO UNAVAILABLE
+===================================================== */
+
+function showVideoUnavailable() {
+
+    video.dataset.videoReady =
+        "false";
+
+
+    videoError.hidden =
+        false;
+
+
+    /*
+     * Keep the video element clean.
+     */
+
+    video.pause();
+
+    video.removeAttribute(
+        "src"
+    );
+
+    video.load();
+
+
+    updatePlayButton();
+
+}
+
+
+    /* =================================================
+       LOAD AUDIO
+    ================================================= */
 
     audio.src =
         "audio/" +
@@ -1131,13 +2001,63 @@ function loadSong(index) {
         );
 
 
-    songTitle.textContent =
+    audio.load();
+
+
+    /* =================================================
+       LOAD VIDEO
+    ================================================= */
+
+    const videoInfo =
+        videos[file] || {};
+
+
+    video.dataset.local =
+        videoInfo.local || "";
+
+
+    video.dataset.cloudinary =
+        videoInfo.cloudinary || "";
+
+
+    /*
+     * Prepare local video.
+     *
+     * This DOES NOT autoplay.
+     */
+
+/* =================================================
+   PREPARE VIDEO + CHECK AVAILABILITY
+================================================= */
+
+videoError.hidden = true;
+
+video.dataset.videoReady = "false";
+
+prepareVideo(
+    file,
+    videoInfo
+);
+
+    /* =================================================
+       TITLES
+    ================================================= */
+
+    const title =
         removeExtension(
             file
         );
 
 
-    songNumber.textContent =
+    songTitle.textContent =
+        title;
+
+
+    visualTitle.textContent =
+        title;
+
+
+    const trackNumber =
         `Track ${
             String(
                 currentSong + 1
@@ -1156,6 +2076,18 @@ function loadSong(index) {
             )
         }`;
 
+
+    songNumber.textContent =
+        trackNumber;
+
+
+    visualNumber.textContent =
+        trackNumber;
+
+
+    /* =================================================
+       RESET PROGRESS
+    ================================================= */
 
     progressBar.style.width =
         "0%";
@@ -1181,80 +2113,280 @@ function loadSong(index) {
 
 
 /* =====================================================
-   PLAY
+   PLAY CURRENT
 ===================================================== */
 
-function playSong() {
+function playCurrent() {
 
-    /*
-     * User interaction starts/resumes the
-     * Web Audio context.
-     */
+    if (
+        currentMode === "audio"
+    ) {
 
-    initializeAudioAnalyzer();
+        playAudio();
 
-    resumeAudioContext();
+    }
 
+    else {
 
-    audio.play()
-        .then(() => {
+        playVideo();
 
-            playIcon.innerHTML =
-                PAUSE_ICON;
-
-
-            playBtn.setAttribute(
-                "aria-label",
-                "Pause"
-            );
-
-
-            playBtn.setAttribute(
-                "title",
-                "Pause"
-            );
-
-
-            createPlaylist(
-                search.value
-            );
-
-        })
-        .catch(error => {
-
-            console.log(
-                "Audio playback error:",
-                error
-            );
-
-        });
+    }
 
 }
 
 
 /* =====================================================
-   PAUSE
+   PLAY AUDIO
 ===================================================== */
 
-function pauseSong() {
+function playAudio() {
+
+    /*
+     * Video must never play together
+     * with audio mode.
+     */
+
+    video.pause();
+
+
+    /*
+     * Only use Web Audio analyser online.
+     * Local file playback stays native.
+     */
+
+    if (
+        window.location.protocol !==
+        "file:"
+    ) {
+
+        initializeAudioAnalyzer();
+
+        resumeAudioContext();
+
+    }
+
+
+    audio.play()
+        .then(
+            () => {
+
+                updatePlayButton();
+
+                createPlaylist(
+                    search.value
+                );
+
+            }
+        )
+        .catch(
+            error => {
+
+                console.error(
+                    "Audio playback failed:",
+                    error
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   PLAY VIDEO
+===================================================== */
+
+async function playVideo() {
+
+    /*
+     * Stop audio.
+     */
 
     audio.pause();
 
 
-    playIcon.innerHTML =
-        PLAY_ICON;
+        /*
+     * If availability check already confirmed
+     * that no video exists, don't try again.
+     */
+
+    if (
+        video.dataset.videoReady !== "true"
+    ) {
+
+        showVideoUnavailable();
+
+        return;
+
+    }
 
 
-    playBtn.setAttribute(
-        "aria-label",
-        "Play"
-    );
+    const file =
+        songs[currentSong];
 
 
-    playBtn.setAttribute(
-        "title",
-        "Play"
-    );
+    const videoInfo =
+        videos[file] || {};
+
+
+    const localUrl =
+        videoInfo.local || "";
+
+
+    const cloudinaryUrl =
+        videoInfo.cloudinary || "";
+
+
+    const attempt =
+        ++videoAttemptId;
+
+
+    videoError.hidden =
+        true;
+
+
+    /* =================================================
+       TRY LOCAL VIDEO
+    ================================================= */
+
+    if (
+        localUrl
+    ) {
+
+        try {
+
+            video.src =
+                localUrl;
+
+            video.load();
+
+
+            await video.play();
+
+
+            /*
+             * Make sure this is still
+             * the current selected track.
+             */
+
+            if (
+                attempt !==
+                videoAttemptId
+            ) {
+
+                return;
+
+            }
+
+
+            videoError.hidden =
+                true;
+
+
+            updatePlayButton();
+
+            createPlaylist(
+                search.value
+            );
+
+
+            return;
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Local video failed:",
+                localUrl,
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       TRY CLOUDINARY VIDEO
+    ================================================= */
+
+    if (
+        cloudinaryUrl
+    ) {
+
+        try {
+
+            video.src =
+                cloudinaryUrl;
+
+            video.load();
+
+
+            await video.play();
+
+
+            if (
+                attempt !==
+                videoAttemptId
+            ) {
+
+                return;
+
+            }
+
+
+            videoError.hidden =
+                true;
+
+
+            updatePlayButton();
+
+            createPlaylist(
+                search.value
+            );
+
+
+            return;
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Cloudinary video failed:",
+                cloudinaryUrl,
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       BOTH FAILED
+    ================================================= */
+
+    videoError.hidden =
+        false;
+
+
+    updatePlayButton();
+
+}
+
+
+/* =====================================================
+   PAUSE AUDIO
+===================================================== */
+
+function pauseAudio() {
+
+    audio.pause();
+
+
+    updatePlayButton();
 
 
     createPlaylist(
@@ -1265,6 +2397,141 @@ function pauseSong() {
 
 
 /* =====================================================
+   PAUSE VIDEO
+===================================================== */
+
+function pauseVideo() {
+
+    video.pause();
+
+
+    updatePlayButton();
+
+
+    createPlaylist(
+        search.value
+    );
+
+}
+
+
+/* =====================================================
+   PLAY / PAUSE
+===================================================== */
+
+function playSong() {
+
+    if (
+        currentMode === "audio"
+    ) {
+
+        if (
+            audio.paused
+        ) {
+
+            playAudio();
+
+        }
+
+        else {
+
+            pauseAudio();
+
+        }
+
+    }
+
+    else {
+
+        if (
+            video.paused
+        ) {
+
+            playVideo();
+
+        }
+
+        else {
+
+            pauseVideo();
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   UPDATE PLAY BUTTON
+===================================================== */
+
+function updatePlayButton() {
+
+    const playing =
+        currentMode === "audio"
+            ? !audio.paused
+            : !video.paused;
+
+
+    if (
+        playing
+    ) {
+
+        playIcon.innerHTML =
+            PAUSE_ICON;
+
+
+        playBtn.setAttribute(
+            "aria-label",
+            "Pause"
+        );
+
+
+        playBtn.setAttribute(
+            "title",
+            "Pause"
+        );
+
+    }
+
+    else {
+
+        playIcon.innerHTML =
+            PLAY_ICON;
+
+
+        playBtn.setAttribute(
+            "aria-label",
+            "Play"
+        );
+
+
+        playBtn.setAttribute(
+            "title",
+            "Play"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MAIN PLAY BUTTON
+===================================================== */
+
+playBtn.addEventListener(
+    "click",
+    () => {
+
+        playSong();
+
+    }
+);
+
+
+/* =====================================================
    AUDIO PLAY EVENT
 ===================================================== */
 
@@ -1272,22 +2539,24 @@ audio.addEventListener(
     "play",
     () => {
 
-        initializeAudioAnalyzer();
+        /*
+         * Online analyser only.
+         */
 
-        resumeAudioContext();
+        if (
+            window.location.protocol !==
+            "file:"
+        ) {
 
-        playIcon.innerHTML =
-            PAUSE_ICON;
+            initializeAudioAnalyzer();
 
-        playBtn.setAttribute(
-            "aria-label",
-            "Pause"
-        );
+            resumeAudioContext();
 
-        playBtn.setAttribute(
-            "title",
-            "Pause"
-        );
+        }
+
+
+        updatePlayButton();
+
 
         createPlaylist(
             search.value
@@ -1305,18 +2574,8 @@ audio.addEventListener(
     "pause",
     () => {
 
-        playIcon.innerHTML =
-            PLAY_ICON;
+        updatePlayButton();
 
-        playBtn.setAttribute(
-            "aria-label",
-            "Play"
-        );
-
-        playBtn.setAttribute(
-            "title",
-            "Play"
-        );
 
         createPlaylist(
             search.value
@@ -1327,59 +2586,297 @@ audio.addEventListener(
 
 
 /* =====================================================
-   PLAY / PAUSE
+   AUDIO ENDED
+=====================================================
+
+   IMPORTANT:
+
+   Natural end:
+   → next track LOADS
+   → NO autoplay
+
 ===================================================== */
 
-playBtn.addEventListener(
-    "click",
+audio.addEventListener(
+    "ended",
     () => {
 
-        if (audio.paused) {
+        if (
+            currentMode !== "audio"
+        ) {
 
-            playSong();
+            return;
+
+        }
+
+
+        /* =============================================
+           REPEAT
+        ============================================= */
+
+        if (
+            repeat
+        ) {
+
+            /*
+             * Reset only.
+             * Do NOT autoplay.
+             */
+
+            audio.currentTime =
+                0;
+
+
+            updatePlayButton();
+
+
+            return;
 
         }
 
-        else {
 
-            pauseSong();
+        /* =============================================
+           SHUFFLE
+        ============================================= */
+
+        if (
+            shuffle
+        ) {
+
+            loadRandomSongOnly();
+
+            return;
 
         }
+
+
+        /* =============================================
+           NORMAL NEXT
+        ============================================= */
+
+        /*
+         * Load next song only.
+         * Do NOT call playAudio().
+         */
+
+        loadSong(
+            currentSong + 1
+        );
 
     }
 );
 
 
 /* =====================================================
-   NEXT
+   AUDIO ERROR
+===================================================== */
+
+audio.addEventListener(
+    "error",
+    () => {
+
+        console.error(
+            "Audio file could not be loaded:",
+            audio.src
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VIDEO PLAY EVENT
+===================================================== */
+
+video.addEventListener(
+    "play",
+    () => {
+
+        /*
+         * Never allow audio and video
+         * to play simultaneously.
+         */
+
+        audio.pause();
+
+
+        updatePlayButton();
+
+
+        createPlaylist(
+            search.value
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VIDEO PAUSE EVENT
+===================================================== */
+
+video.addEventListener(
+    "pause",
+    () => {
+
+        updatePlayButton();
+
+
+        createPlaylist(
+            search.value
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VIDEO ENDED
+=====================================================
+
+   IMPORTANT:
+
+   Natural end:
+   → next video LOADS
+   → NO autoplay
+
+===================================================== */
+
+video.addEventListener(
+    "ended",
+    () => {
+
+        if (
+            currentMode !== "visual"
+        ) {
+
+            return;
+
+        }
+
+
+        /* =============================================
+           REPEAT
+        ============================================= */
+
+        if (
+            repeat
+        ) {
+
+            /*
+             * Reset only.
+             * Do NOT autoplay.
+             */
+
+            video.currentTime =
+                0;
+
+
+            updatePlayButton();
+
+
+            return;
+
+        }
+
+
+        /* =============================================
+           SHUFFLE
+        ============================================= */
+
+        if (
+            shuffle
+        ) {
+
+            loadRandomSongOnly();
+
+            return;
+
+        }
+
+
+        /* =============================================
+           NORMAL NEXT
+        ============================================= */
+
+        /*
+         * Load next video only.
+         * Do NOT call playVideo().
+         */
+
+        loadSong(
+            currentSong + 1
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VIDEO ERROR
+===================================================== */
+
+video.addEventListener(
+    "error",
+    () => {
+
+        /*
+         * playVideo() handles:
+         *
+         * Local → Cloudinary → Error
+         *
+         * So we don't automatically switch
+         * sources here and create duplicate
+         * fallback attempts.
+         */
+
+        console.warn(
+            "Video source error."
+        );
+
+    }
+);
+
+
+/* =====================================================
+   NEXT BUTTON
+=====================================================
+
+   Manual user action:
+   → load next
+   → PLAY immediately
 ===================================================== */
 
 nextBtn.addEventListener(
     "click",
     () => {
 
-        if (shuffle) {
+        if (
+            shuffle
+        ) {
 
-            playRandomSong();
+            loadRandomSongOnly();
 
-        }
+            playCurrent();
 
-        else {
-
-            loadSong(
-                currentSong + 1
-            );
-
-            playSong();
+            return;
 
         }
+
+
+        loadSong(
+            currentSong + 1
+        );
+
+
+        playCurrent();
 
     }
 );
 
 
 /* =====================================================
-   PREVIOUS
+   PREVIOUS BUTTON
 ===================================================== */
 
 previousBtn.addEventListener(
@@ -1390,24 +2887,36 @@ previousBtn.addEventListener(
             currentSong - 1
         );
 
-        playSong();
+
+        /*
+         * Manual user action,
+         * so play immediately.
+         */
+
+        playCurrent();
 
     }
 );
 
 
 /* =====================================================
-   BACK 10
+   BACK 10 SECONDS
 ===================================================== */
 
 backBtn.addEventListener(
     "click",
     () => {
 
-        audio.currentTime =
+        const player =
+            currentMode === "audio"
+                ? audio
+                : video;
+
+
+        player.currentTime =
             Math.max(
                 0,
-                audio.currentTime - 10
+                player.currentTime - 10
             );
 
     }
@@ -1415,41 +2924,23 @@ backBtn.addEventListener(
 
 
 /* =====================================================
-   FORWARD 10
+   FORWARD 10 SECONDS
 ===================================================== */
 
 forwardBtn.addEventListener(
     "click",
     () => {
 
-        if (!audio.duration) {
+        const player =
+            currentMode === "audio"
+                ? audio
+                : video;
 
-            return;
-
-        }
-
-
-        audio.currentTime =
-            Math.min(
-                audio.duration,
-                audio.currentTime + 10
-            );
-
-    }
-);
-
-
-/* =====================================================
-   PROGRESS UPDATE
-===================================================== */
-
-audio.addEventListener(
-    "timeupdate",
-    () => {
 
         if (
-            !audio.duration ||
-            isDragging
+            !isFinite(
+                player.duration
+            )
         ) {
 
             return;
@@ -1457,17 +2948,82 @@ audio.addEventListener(
         }
 
 
-        updateProgress(
-            audio.currentTime
-        );
+        player.currentTime =
+            Math.min(
+                player.duration,
+                player.currentTime + 10
+            );
 
     }
 );
 
 
-function updateProgress(time) {
+/* =====================================================
+   LOAD RANDOM SONG ONLY
+=====================================================
 
-    if (!audio.duration) {
+   IMPORTANT:
+   Used only when a track naturally ends
+   while Shuffle is ON.
+
+   It loads a random track.
+   It does NOT autoplay.
+
+===================================================== */
+
+function loadRandomSongOnly() {
+
+    if (
+        songs.length <= 1
+    ) {
+
+        return;
+
+    }
+
+
+    let randomIndex;
+
+
+    do {
+
+        randomIndex =
+            Math.floor(
+                Math.random() *
+                songs.length
+            );
+
+    }
+    while (
+        randomIndex === currentSong
+    );
+
+
+    /*
+     * Only load.
+     * No playCurrent().
+     */
+
+    loadSong(
+        randomIndex
+    );
+
+}
+
+
+/* =====================================================
+   PROGRESS UPDATE
+===================================================== */
+
+function updateProgress(
+    time,
+    total
+) {
+
+    if (
+        !isFinite(total) ||
+        total <= 0
+    ) {
 
         return;
 
@@ -1475,18 +3031,21 @@ function updateProgress(time) {
 
 
     const percent =
-        (
-            time /
-            audio.duration
-        ) * 100;
+        Math.max(
+            0,
+            Math.min(
+                100,
+                (time / total) * 100
+            )
+        );
 
 
     progressBar.style.width =
-        percent + "%";
+        `${percent}%`;
 
 
     progressThumb.style.left =
-        percent + "%";
+        `${percent}%`;
 
 
     currentTime.textContent =
@@ -1498,12 +3057,75 @@ function updateProgress(time) {
 
 
 /* =====================================================
-   DURATION
+   AUDIO PROGRESS
+===================================================== */
+
+audio.addEventListener(
+    "timeupdate",
+    () => {
+
+        if (
+            currentMode !== "audio" ||
+            isDragging
+        ) {
+
+            return;
+
+        }
+
+
+        updateProgress(
+            audio.currentTime,
+            audio.duration
+        );
+
+    }
+);
+
+
+/* =====================================================
+   VIDEO PROGRESS
+===================================================== */
+
+video.addEventListener(
+    "timeupdate",
+    () => {
+
+        if (
+            currentMode !== "visual" ||
+            isDragging
+        ) {
+
+            return;
+
+        }
+
+
+        updateProgress(
+            video.currentTime,
+            video.duration
+        );
+
+    }
+);
+
+
+/* =====================================================
+   AUDIO METADATA
 ===================================================== */
 
 audio.addEventListener(
     "loadedmetadata",
     () => {
+
+        if (
+            currentMode !== "audio"
+        ) {
+
+            return;
+
+        }
+
 
         duration.textContent =
             formatTime(
@@ -1515,14 +3137,51 @@ audio.addEventListener(
 
 
 /* =====================================================
-   SEEK
+   VIDEO METADATA
+===================================================== */
+
+video.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        if (
+            currentMode !== "visual"
+        ) {
+
+            return;
+
+        }
+
+
+        duration.textContent =
+            formatTime(
+                video.duration
+            );
+
+    }
+);
+
+
+/* =====================================================
+   SEEK FROM POINTER
 ===================================================== */
 
 function seekFromPointer(
     clientX
 ) {
 
-    if (!audio.duration) {
+    const player =
+        currentMode === "audio"
+            ? audio
+            : video;
+
+
+    if (
+        !isFinite(
+            player.duration
+        ) ||
+        player.duration <= 0
+    ) {
 
         return;
 
@@ -1555,22 +3214,23 @@ function seekFromPointer(
 
     const newTime =
         percent *
-        audio.duration;
+        player.duration;
 
 
-    audio.currentTime =
+    player.currentTime =
         newTime;
 
 
     updateProgress(
-        newTime
+        newTime,
+        player.duration
     );
 
 }
 
 
 /* =====================================================
-   MOUSE DRAG
+   MOUSE SEEK
 ===================================================== */
 
 progressTrack.addEventListener(
@@ -1598,7 +3258,9 @@ document.addEventListener(
     "mousemove",
     event => {
 
-        if (!isDragging) {
+        if (
+            !isDragging
+        ) {
 
             return;
 
@@ -1617,13 +3279,6 @@ document.addEventListener(
     "mouseup",
     () => {
 
-        if (!isDragging) {
-
-            return;
-
-        }
-
-
         isDragging =
             false;
 
@@ -1637,7 +3292,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   MOBILE TOUCH DRAG
+   TOUCH SEEK
 ===================================================== */
 
 progressTrack.addEventListener(
@@ -1653,9 +3308,15 @@ progressTrack.addEventListener(
         );
 
 
-        seekFromPointer(
-            event.touches[0].clientX
-        );
+        if (
+            event.touches.length
+        ) {
+
+            seekFromPointer(
+                event.touches[0].clientX
+            );
+
+        }
 
     },
     {
@@ -1668,7 +3329,10 @@ document.addEventListener(
     "touchmove",
     event => {
 
-        if (!isDragging) {
+        if (
+            !isDragging ||
+            !event.touches.length
+        ) {
 
             return;
 
@@ -1690,56 +3354,12 @@ document.addEventListener(
     "touchend",
     () => {
 
-        if (!isDragging) {
-
-            return;
-
-        }
-
-
         isDragging =
             false;
 
 
         progressTrack.classList.remove(
             "dragging"
-        );
-
-    }
-);
-
-
-/* =====================================================
-   SONG ENDED
-===================================================== */
-
-audio.addEventListener(
-    "ended",
-    () => {
-
-        if (repeat) {
-
-            audio.currentTime =
-                0;
-
-
-            playSong();
-
-
-            return;
-
-        }
-
-
-        pauseSong();
-
-
-        audio.currentTime =
-            audio.duration;
-
-
-        updateProgress(
-            audio.duration
         );
 
     }
@@ -1789,51 +3409,6 @@ shuffleBtn.addEventListener(
 
 
 /* =====================================================
-   RANDOM SONG
-===================================================== */
-
-function playRandomSong() {
-
-    if (
-        songs.length <= 1
-    ) {
-
-        playSong();
-
-        return;
-
-    }
-
-
-    let random;
-
-
-    do {
-
-        random =
-            Math.floor(
-                Math.random() *
-                songs.length
-            );
-
-    }
-
-    while (
-        random === currentSong
-    );
-
-
-    loadSong(
-        random
-    );
-
-
-    playSong();
-
-}
-
-
-/* =====================================================
    SPEED
 ===================================================== */
 
@@ -1841,10 +3416,18 @@ speed.addEventListener(
     "change",
     () => {
 
-        audio.playbackRate =
-            Number(
+        const rate =
+            parseFloat(
                 speed.value
             );
+
+
+        audio.playbackRate =
+            rate;
+
+
+        video.playbackRate =
+            rate;
 
     }
 );
@@ -1858,29 +3441,38 @@ volume.addEventListener(
     "input",
     () => {
 
-        audio.volume =
-            Number(
+        const value =
+            parseFloat(
                 volume.value
             );
 
 
+        audio.volume =
+            value;
+
+
+        video.volume =
+            value;
+
+
         if (
-            audio.volume > 0
+            value > 0
         ) {
 
             previousVolume =
-                audio.volume;
-
-
-            volumeIcon.innerHTML =
-                VOLUME_ICON;
+                value;
 
         }
 
-        else {
+
+        if (
+            volumeIcon
+        ) {
 
             volumeIcon.innerHTML =
-                MUTE_ICON;
+                value === 0
+                    ? MUTE_ICON
+                    : VOLUME_ICON;
 
         }
 
@@ -1896,15 +3488,25 @@ muteBtn.addEventListener(
     "click",
     () => {
 
+        const player =
+            currentMode === "audio"
+                ? audio
+                : video;
+
+
         if (
-            audio.volume > 0
+            player.volume > 0
         ) {
 
             previousVolume =
-                audio.volume;
+                player.volume;
 
 
             audio.volume =
+                0;
+
+
+            video.volume =
                 0;
 
 
@@ -1912,23 +3514,39 @@ muteBtn.addEventListener(
                 0;
 
 
-            volumeIcon.innerHTML =
-                MUTE_ICON;
+            if (
+                volumeIcon
+            ) {
+
+                volumeIcon.innerHTML =
+                    MUTE_ICON;
+
+            }
 
         }
 
         else {
 
             audio.volume =
-                previousVolume || 1;
+                previousVolume;
+
+
+            video.volume =
+                previousVolume;
 
 
             volume.value =
-                audio.volume;
+                previousVolume;
 
 
-            volumeIcon.innerHTML =
-                VOLUME_ICON;
+            if (
+                volumeIcon
+            ) {
+
+                volumeIcon.innerHTML =
+                    VOLUME_ICON;
+
+            }
 
         }
 
@@ -1953,308 +3571,81 @@ search.addEventListener(
 
 
 /* =====================================================
-   KEYBOARD SHORTCUTS
+   VIDEO SETTINGS
 ===================================================== */
 
-document.addEventListener(
-    "keydown",
-    event => {
+video.controls =
+    true;
 
-        /*
-         * Don't trigger shortcuts while typing
-         * in the search box.
-         */
 
-        if (
-            document.activeElement === search
-        ) {
+video.preload =
+    "metadata";
 
-            return;
 
-        }
+video.playsInline =
+    true;
 
 
-        /* =============================================
-           SPACE = PLAY / PAUSE
-        ============================================= */
+/* =====================================================
+   INITIAL VOLUME
+===================================================== */
 
-        if (
-            event.code === "Space"
-        ) {
+audio.volume =
+    1;
 
-            event.preventDefault();
 
+video.volume =
+    1;
 
-            if (audio.paused) {
 
-                playSong();
+volume.value =
+    1;
 
-            }
 
-            else {
+if (
+    volumeIcon
+) {
 
-                pauseSong();
+    volumeIcon.innerHTML =
+        VOLUME_ICON;
 
-            }
+}
 
-        }
 
+/* =====================================================
+   INITIALIZATION
+=====================================================
 
-        /* =============================================
-           LEFT = BACK 10 SEC
-        ============================================= */
+   IMPORTANT:
 
-        if (
-            event.code === "ArrowLeft"
-        ) {
+   Visuals is the DEFAULT mode.
 
-            event.preventDefault();
+   Nothing automatically plays on page load.
+===================================================== */
 
-
-            audio.currentTime =
-                Math.max(
-                    0,
-                    audio.currentTime - 10
-                );
-
-        }
-
-
-        /* =============================================
-           RIGHT = FORWARD 10 SEC
-        ============================================= */
-
-        if (
-            event.code === "ArrowRight"
-        ) {
-
-            event.preventDefault();
-
-
-            if (!audio.duration) {
-
-                return;
-
-            }
-
-
-            audio.currentTime =
-                Math.min(
-                    audio.duration,
-                    audio.currentTime + 10
-                );
-
-        }
-
-
-        /* =============================================
-           UP = VOLUME +
-        ============================================= */
-
-        if (
-            event.code === "ArrowUp"
-        ) {
-
-            event.preventDefault();
-
-
-            audio.volume =
-                Math.min(
-                    1,
-                    audio.volume + 0.1
-                );
-
-
-            volume.value =
-                audio.volume;
-
-
-            if (
-                audio.volume > 0
-            ) {
-
-                volumeIcon.innerHTML =
-                    VOLUME_ICON;
-
-            }
-
-        }
-
-
-        /* =============================================
-           DOWN = VOLUME -
-        ============================================= */
-
-        if (
-            event.code === "ArrowDown"
-        ) {
-
-            event.preventDefault();
-
-
-            audio.volume =
-                Math.max(
-                    0,
-                    audio.volume - 0.1
-                );
-
-
-            volume.value =
-                audio.volume;
-
-
-            if (
-                audio.volume === 0
-            ) {
-
-                volumeIcon.innerHTML =
-                    MUTE_ICON;
-
-            }
-
-            else {
-
-                volumeIcon.innerHTML =
-                    VOLUME_ICON;
-
-            }
-
-        }
-
-
-        /* =============================================
-           N = NEXT
-        ============================================= */
-
-        if (
-            event.key.toLowerCase() === "n"
-        ) {
-
-            if (shuffle) {
-
-                playRandomSong();
-
-            }
-
-            else {
-
-                loadSong(
-                    currentSong + 1
-                );
-
-                playSong();
-
-            }
-
-        }
-
-
-        /* =============================================
-           P = PREVIOUS
-        ============================================= */
-
-        if (
-            event.key.toLowerCase() === "p"
-        ) {
-
-            loadSong(
-                currentSong - 1
-            );
-
-            playSong();
-
-        }
-
-    }
+loadSong(
+    0
 );
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+setMode(
+    "visual"
+);
 
-function formatTime(seconds) {
-
-    if (
-        !seconds ||
-        isNaN(seconds)
-    ) {
-
-        return "0:00";
-
-    }
-
-
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
-
-
-    const secondsPart =
-        Math.floor(
-            seconds % 60
-        )
-        .toString()
-        .padStart(
-            2,
-            "0"
-        );
-
-
-    return `${minutes}:${secondsPart}`;
-
-}
-
-
-function removeExtension(
-    filename
-) {
-
-    return filename
-        .replace(
-            /\.[^/.]+$/,
-            ""
-        );
-
-}
-
-
-function escapeHTML(text) {
-
-    return text
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-audio.volume = 1;
-
-resetAudioMeter();
 
 createPlaylist();
 
-loadSong(0);
+
+/* =====================================================
+   LOCAL AUDIO METER
+===================================================== */
+
+if (
+    window.location.protocol === "file:"
+) {
+
+    requestAnimationFrame(
+        updateLocalMeter
+    );
+
+}
