@@ -108,7 +108,7 @@ const videos = {
 
     "06_dahi-handi.mp3": {
         local: "videos/06_dahi-handi.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787978621/06_dahi-handi_lx6fsw.mp4"
     },
 
     "07_akroor-yashoda.mp3": {
