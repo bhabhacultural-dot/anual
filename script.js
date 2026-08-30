@@ -98,7 +98,7 @@ const videos = {
 
     "04_krishna-janm.mp3": {
         local: "videos/04_krishna-janm.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061400/04_krishna-janm-compressed_nlsjw1.mp4"
     },
 
     "05_brahmand-darshan.mp3": {
@@ -128,7 +128,7 @@ const videos = {
 
     "10_kans-krishna.mp3": {
         local: "videos/10_kans-krishna.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059181/10_kans-krishna_yjwcel.mp4"
     },
 
     "11_balram-krishna.mp3": {
@@ -153,17 +153,17 @@ const videos = {
 
     "15_shakuni-duryodhan.mp3": {
         local: "videos/15_shakuni-duryodhan.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059175/15_shakuni-duryodhan_y1amho.mp4"
     },
 
     "16_cheer-haran.mp3": {
         local: "videos/16_cheer-haran.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061408/16_cheer-haran-compressed_be2hvo.mp4"
     },
 
     "17_shanti-doot.mp3": {
         local: "videos/17_shanti-doot.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059188/17_shanti-doot_bzuevp.mp4"
     },
 
     "18_geeta-updesh.mp3": {
@@ -198,7 +198,7 @@ const videos = {
 
     "24_madhurashtak.mp3": {
         local: "videos/24_madhurashtak.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061429/24_madhurashtak-compressed_alh2o1.mp4"
     }
 
 };
