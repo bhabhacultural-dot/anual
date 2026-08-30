@@ -118,7 +118,7 @@ const videos = {
 
     "08_radha-krishna.mp3": {
         local: "videos/08_radha-krishna.mp4",
-        cloudinary: ""
+        cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061803/08_radha-krishna_avogj4.mp4"
     },
 
     "09_kubja.mp3": {
