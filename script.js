@@ -33,28 +33,28 @@ const songs = [
     "02_presentation-class-1-3.mp3",
     "03_ashtaavtaar.mp3",
     "04_krishna-janm.mp3",
-    "05_brahmand-darshan.mp3",
-    "06_dahi-handi.mp3",
-    "07_akroor-yashoda.mp3",
-    "08_radha-krishna.mp3",
-    "09_kubja.mp3",
-    "10_kans-krishna.mp3",
-    "11_balram-krishna.mp3",
-    "12_sudama.mp3",
-    "13_shishupal.mp3",
-    "14_krishna-draupadi.mp3",
-    "15_shakuni-duryodhan.mp3",
-    "16_cheer-haran.mp3",
-    "17_shanti-doot.mp3",
-    "18_geeta-updesh.mp3",
-    "19_gandhari-shraap.mp3",
-    "20_dwarka-vileen.mp3",
-    "21_krishna-bhakt.mp3",
-    "22_buddh-kalki.mp3",
-    "23_krishna-manch-agman.mp3",
-    "24_madhurashtak.mp3"
+    "05_dance-class-1-3.mp3",
+    "06_brahmand-darshan.mp3",
+    "07_dahi-handi.mp3",
+    "08_akroor-yashoda.mp3",
+    "09_radha-krishna.mp3",
+    "10_kubja.mp3",
+    "11_kans-krishna.mp3",
+    "12_balram-krishna.mp3",
+    "13_sudama.mp3",
+    "14_shishupal.mp3",
+    "15_krishna-draupadi.mp3",
+    "16_shakuni-duryodhan.mp3",
+    "17_cheer-haran.mp3",
+    "18_shanti-doot.mp3",
+    "19_geeta-updesh.mp3",
+    "20_gandhari-shraap.mp3",
+    "21_dwarka-vileen.mp3",
+    "22_krishna-bhakt.mp3",
+    "23_buddh-kalki.mp3",
+    "24_krishna-manch-agman.mp3",
+    "25_madhurashtak.mp3"
 ];
-
 
 /* =====================================================
    VIDEO SOURCES
@@ -79,6 +79,7 @@ const songs = [
 
 ===================================================== */
 
+```js
 const videos = {
 
     "01_ganesh-vandana.mp3": {
@@ -101,107 +102,113 @@ const videos = {
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061400/04_krishna-janm-compressed_nlsjw1.mp4"
     },
 
-    "05_brahmand-darshan.mp3": {
-        local: "videos/05_brahmand-darshan.mp4",
+    "05_dance-class-1-3.mp3": {
+        local: "videos/05_dance-class-1-3.mp4",
+        cloudinary: ""
+    },
+
+    "06_brahmand-darshan.mp3": {
+        local: "videos/06_brahmand-darshan.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974033/05_bhrahmand-darshan_zbwjwa.mp4"
     },
 
-    "06_dahi-handi.mp3": {
-        local: "videos/06_dahi-handi.mp4",
+    "07_dahi-handi.mp3": {
+        local: "videos/07_dahi-handi.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787978621/06_dahi-handi_lx6fsw.mp4"
     },
 
-    "07_akroor-yashoda.mp3": {
-        local: "videos/07_akroor-yashoda.mp4",
+    "08_akroor-yashoda.mp3": {
+        local: "videos/08_akroor-yashoda.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787973973/07_akroor-yashoda_p9aoif.mp4"
     },
 
-    "08_radha-krishna.mp3": {
-        local: "videos/08_radha-krishna.mp4",
+    "09_radha-krishna.mp3": {
+        local: "videos/09_radha-krishna.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061803/08_radha-krishna_avogj4.mp4"
     },
 
-    "09_kubja.mp3": {
-        local: "videos/09_kubja.mp4",
+    "10_kubja.mp3": {
+        local: "videos/10_kubja.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974035/09_kubja_migwil.mp4"
     },
 
-    "10_kans-krishna.mp3": {
-        local: "videos/10_kans-krishna.mp4",
+    "11_kans-krishna.mp3": {
+        local: "videos/11_kans-krishna.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059181/10_kans-krishna_yjwcel.mp4"
     },
 
-    "11_balram-krishna.mp3": {
-        local: "videos/11_balram-krishna.mp4",
+    "12_balram-krishna.mp3": {
+        local: "videos/12_balram-krishna.mp4",
         cloudinary: ""
     },
 
-    "12_sudama.mp3": {
-        local: "videos/12_sudama.mp4",
+    "13_sudama.mp3": {
+        local: "videos/13_sudama.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974095/12_sudama_w4gg9i.mp4"
     },
 
-    "13_shishupal.mp3": {
-        local: "videos/13_shishupal.mp4",
+    "14_shishupal.mp3": {
+        local: "videos/14_shishupal.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974133/13_shishupal_jmmzh5.mp4"
     },
 
-    "14_krishna-draupadi.mp3": {
-        local: "videos/14_krishna-draupadi.mp4",
+    "15_krishna-draupadi.mp3": {
+        local: "videos/15_krishna-draupadi.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974042/14_krishna-draupdi_poyo1k.mp4"
     },
 
-    "15_shakuni-duryodhan.mp3": {
-        local: "videos/15_shakuni-duryodhan.mp4",
+    "16_shakuni-duryodhan.mp3": {
+        local: "videos/16_shakuni-duryodhan.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059175/15_shakuni-duryodhan_y1amho.mp4"
     },
 
-    "16_cheer-haran.mp3": {
-        local: "videos/16_cheer-haran.mp4",
+    "17_cheer-haran.mp3": {
+        local: "videos/17_cheer-haran.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061408/16_cheer-haran-compressed_be2hvo.mp4"
     },
 
-    "17_shanti-doot.mp3": {
-        local: "videos/17_shanti-doot.mp4",
+    "18_shanti-doot.mp3": {
+        local: "videos/18_shanti-doot.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788059188/17_shanti-doot_bzuevp.mp4"
     },
 
-    "18_geeta-updesh.mp3": {
-        local: "videos/18_geeta-updesh.mp4",
+    "19_geeta-updesh.mp3": {
+        local: "videos/19_geeta-updesh.mp4",
         cloudinary: ""
     },
 
-    "19_gandhari-shraap.mp3": {
-        local: "videos/19_gandhari-shraap.mp4",
+    "20_gandhari-shraap.mp3": {
+        local: "videos/20_gandhari-shraap.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974127/19_gandhari-shraap_dplv6u.mp4"
     },
 
-    "20_dwarka-vileen.mp3": {
-        local: "videos/20_dwarka-vileen.mp4",
+    "21_dwarka-vileen.mp3": {
+        local: "videos/21_dwarka-vileen.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974082/20_dwarka-vileen_pdmozj.mp4"
     },
 
-    "21_krishna-bhakt.mp3": {
-        local: "videos/21_krishna-bhakt.mp4",
+    "22_krishna-bhakt.mp3": {
+        local: "videos/22_krishna-bhakt.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974142/21_krishna-bhakt_jztlcb.mp4"
     },
 
-    "22_buddh-kalki.mp3": {
-        local: "videos/22_buddh-kalki.mp4",
+    "23_buddh-kalki.mp3": {
+        local: "videos/23_buddh-kalki.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974060/22_budh-kalki_rkbbgx.mp4"
     },
 
-    "23_krishna-manch-agman.mp3": {
-        local: "videos/23_krishna-manch-agman.mp4",
+    "24_krishna-manch-agman.mp3": {
+        local: "videos/24_krishna-manch-agman.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974138/23_krishna-mach-agman_dgwxml.mp4"
     },
 
-    "24_madhurashtak.mp3": {
-        local: "videos/24_madhurashtak.mp4",
+    "25_madhurashtak.mp3": {
+        local: "videos/25_madhurashtak.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061429/24_madhurashtak-compressed_alh2o1.mp4"
     }
 
 };
+```
 
 
 /* =====================================================
