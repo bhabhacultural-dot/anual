@@ -33,9 +33,9 @@ const songs = [
     "02_presentation-class-1-3.mp3",
     "03_ashtaavtaar.mp3",
     "04_krishna-janm.mp3",
-    "05_dance-class-1-3.mp3",
-    "06_brahmand-darshan.mp3",
-    "07_dahi-handi.mp3",
+    "05_brahmand-darshan.mp3",
+    "06_dahi-handi.mp3",
+    "07_dance-class-1-3.mp3",
     "08_akroor-yashoda.mp3",
     "09_radha-krishna.mp3",
     "10_kubja.mp3",
@@ -101,12 +101,7 @@ const videos = {
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1788061400/04_krishna-janm-compressed_nlsjw1.mp4"
     },
 
-    "05_dance-class-1-3.mp3": {
-        local: "videos/05_dance-class-1-3.mp4",
-        cloudinary: ""
-    },
-
-    "06_brahmand-darshan.mp3": {
+    "05_brahmand-darshan.mp3": {
         local: "videos/06_brahmand-darshan.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787974033/05_bhrahmand-darshan_zbwjwa.mp4"
     },
@@ -114,6 +109,11 @@ const videos = {
     "07_dahi-handi.mp3": {
         local: "videos/07_dahi-handi.mp4",
         cloudinary: "https://res.cloudinary.com/dew69gkkw/video/upload/v1787978621/06_dahi-handi_lx6fsw.mp4"
+    },
+
+       "07_dance-class-1-3.mp3": {
+        local: "videos/05_dance-class-1-3.mp4",
+        cloudinary: ""
     },
 
     "08_akroor-yashoda.mp3": {
